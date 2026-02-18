@@ -64,6 +64,75 @@ body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 120px); }
   .comment-form-row { flex-direction:column; }
   .post-nav-outer { padding-top:24px; flex-direction:column; }
 }
+
+/* ── EDITOR ─────────────────────────────────────────────────────── */
+.editor-outer { max-width:740px; margin:0 auto; padding:0 40px 0; }
+.editor-bar { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); margin-bottom:0; flex-wrap:wrap; gap:10px; }
+.editor-bar-left { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.editor-label { font-size:16px; font-weight:600; letter-spacing:.35em; color:var(--gold); text-transform:uppercase; }
+.editor-mode-badge { font-size:16px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); padding:3px 10px; border:1px solid var(--border); }
+.editor-mode-badge.editing { color:var(--needs-txt); border-color:var(--needs-bd); background:var(--needs-bg); }
+.editor-btn { font-family:'Montserrat',sans-serif; font-size:16px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; padding:8px 18px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all .18s; white-space:nowrap; }
+.editor-btn:hover { border-color:var(--gold); color:var(--gold); }
+.editor-btn.primary { background:var(--gold); color:var(--darker); border-color:var(--gold); }
+.editor-btn.primary:hover { opacity:.85; }
+.editor-btn.danger { border-color:var(--rejected-bd); color:var(--rejected-txt); }
+.editor-btn.danger:hover { background:var(--rejected-bg); }
+
+.editor-toolbar { display:none; align-items:center; gap:4px; padding:10px 0; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.editor-toolbar.visible { display:flex; }
+.tb-btn { font-family:'Montserrat',sans-serif; font-size:16px; font-weight:600; padding:5px 10px; border:1px solid var(--border); background:var(--panel); color:var(--text2); cursor:pointer; transition:all .15s; min-width:32px; text-align:center; }
+.tb-btn:hover { border-color:var(--gold); color:var(--gold); }
+.tb-btn.active { background:var(--gold); color:var(--darker); border-color:var(--gold); }
+.tb-sep { width:1px; height:24px; background:var(--border); margin:0 4px; }
+.tb-label { font-size:16px; font-weight:500; letter-spacing:.2em; color:var(--dim); text-transform:uppercase; padding:0 4px; }
+
+.editor-content { outline:none; min-height:200px; }
+.editor-content.editable { background:var(--darker); border:1px solid var(--needs-bd); padding:24px 28px; margin:0; cursor:text; }
+.editor-content.editable:focus { border-color:var(--gold); }
+.editor-content.editable h2 { border-bottom:1px dashed var(--border); }
+
+/* ── VERSION HISTORY ─────────────────────────────────────────────── */
+.vh-outer { max-width:740px; margin:0 auto; padding:0 40px 0; }
+.vh-bar { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); cursor:pointer; user-select:none; }
+.vh-bar:hover .vh-title { color:var(--text); }
+.vh-title { font-size:16px; font-weight:600; letter-spacing:.35em; color:var(--muted); text-transform:uppercase; transition:color .18s; }
+.vh-toggle { font-size:16px; color:var(--dim); transition:transform .2s; }
+.vh-toggle.open { transform:rotate(180deg); }
+.vh-list { display:none; flex-direction:column; gap:0; margin-bottom:0; }
+.vh-list.open { display:flex; }
+.vh-entry { display:flex; align-items:flex-start; gap:14px; padding:14px 0; border-bottom:1px solid var(--border2); cursor:pointer; transition:background .15s; }
+.vh-entry:hover { background:var(--panel); margin:0 -16px; padding:14px 16px; }
+.vh-entry-meta { flex:1; min-width:0; }
+.vh-entry-time { font-size:16px; font-weight:500; color:var(--text2); display:block; margin-bottom:3px; }
+.vh-entry-author { font-size:16px; color:var(--muted); font-weight:300; }
+.vh-entry-preview { font-size:16px; color:var(--dim); font-weight:300; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:4px; }
+.vh-restore-btn { font-family:'Montserrat',sans-serif; font-size:16px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; padding:6px 14px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0; transition:all .18s; white-space:nowrap; }
+.vh-restore-btn:hover { border-color:var(--gold); color:var(--gold); }
+.vh-current-badge { font-size:16px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; padding:6px 14px; color:var(--gold); border:1px solid var(--gold); flex-shrink:0; }
+.vh-empty { font-size:16px; color:var(--dim); font-style:italic; padding:16px 0; }
+.vh-diff { display:none; font-size:16px; color:var(--muted); font-weight:300; font-style:italic; margin-top:2px; }
+
+/* ── RESTORE MODAL ───────────────────────────────────────────────── */
+.restore-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.75); z-index:10000; align-items:center; justify-content:center; padding:20px; }
+.restore-modal.open { display:flex; }
+.restore-box { background:var(--dark); border:1px solid var(--border); max-width:680px; width:100%; max-height:80vh; display:flex; flex-direction:column; }
+.restore-header { display:flex; align-items:center; justify-content:space-between; padding:18px 22px; border-bottom:1px solid var(--border); }
+.restore-title { font-size:16px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); }
+.restore-close { font-size:20px; background:none; border:none; color:var(--muted); cursor:pointer; padding:4px 8px; }
+.restore-close:hover { color:var(--text); }
+.restore-preview { padding:20px 22px; overflow-y:auto; flex:1; }
+.restore-preview h2 { font-size:18px; color:var(--text); margin:20px 0 8px; }
+.restore-preview p { font-size:16px; color:var(--text2); line-height:1.8; margin-bottom:12px; }
+.restore-actions { display:flex; gap:10px; padding:16px 22px; border-top:1px solid var(--border); justify-content:flex-end; }
+
+@media(max-width:600px) {
+  .editor-outer,.vh-outer { padding-left:16px; padding-right:16px; }
+  .editor-bar { flex-direction:column; align-items:flex-start; }
+  .editor-toolbar { gap:2px; }
+  .tb-btn { padding:5px 8px; font-size:16px; }
+}
+
 </style>
 </head>
 <body>
@@ -105,7 +174,7 @@ body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 120px); }
 <div class="gold-rule"></div>
 
 <div class="pbw">
-  <div class="post-body">
+  <div class="post-body" id="post-body-content">
     <p>We live in a moment that celebrates abundance. Design culture — on Instagram, Pinterest, and TV — tends to reward rooms that are maximally decorated: every surface interesting, every wall doing something. And while the maximalist approach can be genuinely beautiful when done with real intention, we've seen enough homes to know that most spaces suffer from the opposite problem: too many competing focal points, no clear hierarchy, and rooms that feel busy rather than rich.</p>
 <p>The most powerful design move we make with clients isn't always addition. Sometimes it's subtraction — and a single, exceptional custom piece at the center of a well-edited room.</p>
 
@@ -125,6 +194,65 @@ body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 120px); }
 <p>Trend-driven rooms require constant refreshing. The color of the year becomes the color of two years ago, and the cycle continues. A room built around a single, exceptionally crafted piece of furniture in enduring materials — walnut, white oak, blackened steel, quality lacquer — doesn't date the same way. The statement piece earns its cost over time, long after the trendy accessories around it have been swapped out.</p>
 
 <p class="cta-text">If you're considering a custom piece for your home and want to talk through how it fits the larger space, that's exactly the kind of conversation we love to have. <a href="https://mdmdesignstudio.com/contact-us/">Reach out</a> or <a href="https://mdmdesignstudio.com/full-portfolio/">explore our portfolio</a> for inspiration.</p>
+  </div>
+</div>
+
+
+<!-- ── EDITOR ──────────────────────────────────────────────────────── -->
+<div class="editor-outer">
+  <div class="editor-bar">
+    <div class="editor-bar-left">
+      <span class="editor-label">Edit Draft</span>
+      <span class="editor-mode-badge" id="edit-mode-badge">Read Only</span>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="editor-btn" id="edit-toggle-btn" onclick="toggleEditor()">✎ Edit</button>
+      <button class="editor-btn primary" id="edit-save-btn" style="display:none;" onclick="saveEdit(10)">↑ Save Version</button>
+      <button class="editor-btn danger" id="edit-cancel-btn" style="display:none;" onclick="cancelEdit()">✕ Cancel</button>
+    </div>
+  </div>
+
+  <div class="editor-toolbar" id="editor-toolbar">
+    <span class="tb-label">Format</span>
+    <button class="tb-btn" onclick="fmt('bold')" title="Bold"><b>B</b></button>
+    <button class="tb-btn" onclick="fmt('italic')" title="Italic"><i>I</i></button>
+    <div class="tb-sep"></div>
+    <span class="tb-label">Block</span>
+    <button class="tb-btn" onclick="fmtBlock('h2')" title="Heading 2">H2</button>
+    <button class="tb-btn" onclick="fmtBlock('h3')" title="Heading 3">H3</button>
+    <button class="tb-btn" onclick="fmtBlock('p')" title="Paragraph">¶</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="fmt('insertUnorderedList')" title="List">☰</button>
+    <button class="tb-btn" onclick="wrapLink()" title="Link">⎆</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="fmt('undo')" title="Undo">↩</button>
+    <button class="tb-btn" onclick="fmt('redo')" title="Redo">↪</button>
+  </div>
+</div>
+
+<!-- ── VERSION HISTORY ──────────────────────────────────────────────── -->
+<div class="vh-outer">
+  <div class="vh-bar" onclick="toggleVH()">
+    <span class="vh-title">Version History <span id="vh-count" style="color:var(--dim);font-weight:300;letter-spacing:.05em;text-transform:none;"></span></span>
+    <span class="vh-toggle" id="vh-toggle">▾</span>
+  </div>
+  <div class="vh-list" id="vh-list">
+    <p class="vh-empty" id="vh-empty">No saved versions yet. Edit and save a version to start your history.</p>
+  </div>
+</div>
+
+<!-- ── RESTORE MODAL ─────────────────────────────────────────────────── -->
+<div class="restore-modal" id="restore-modal">
+  <div class="restore-box">
+    <div class="restore-header">
+      <span class="restore-title">Restore this version?</span>
+      <button class="restore-close" onclick="closeRestoreModal()">✕</button>
+    </div>
+    <div class="restore-preview" id="restore-preview"></div>
+    <div class="restore-actions">
+      <button class="editor-btn" onclick="closeRestoreModal()">Cancel</button>
+      <button class="editor-btn primary" onclick="confirmRestore()">Restore this Version</button>
+    </div>
   </div>
 </div>
 
@@ -325,6 +453,221 @@ window.fabAction = async function(postId, action) {
     await commentsRef.push(record);
   }
 };
+
+// ── EDITOR ───────────────────────────────────────────────────────────────────
+
+let _editingMode = false;
+let _originalHTML = '';
+let _pendingRestore = null;
+
+function toggleEditor() {
+  if (_editingMode) { cancelEdit(); return; }
+  _editingMode = true;
+  _originalHTML = document.getElementById('post-body-content').innerHTML;
+
+  const body = document.getElementById('post-body-content');
+  body.classList.add('editable');
+  body.contentEditable = 'true';
+  body.focus();
+
+  document.getElementById('edit-mode-badge').textContent = 'Editing';
+  document.getElementById('edit-mode-badge').classList.add('editing');
+  document.getElementById('editor-toolbar').classList.add('visible');
+  document.getElementById('edit-toggle-btn').style.display = 'none';
+  document.getElementById('edit-save-btn').style.display = '';
+  document.getElementById('edit-cancel-btn').style.display = '';
+}
+
+function cancelEdit() {
+  _editingMode = false;
+  const body = document.getElementById('post-body-content');
+  body.innerHTML = _originalHTML;
+  body.classList.remove('editable');
+  body.contentEditable = 'false';
+
+  document.getElementById('edit-mode-badge').textContent = 'Read Only';
+  document.getElementById('edit-mode-badge').classList.remove('editing');
+  document.getElementById('editor-toolbar').classList.remove('visible');
+  document.getElementById('edit-toggle-btn').style.display = '';
+  document.getElementById('edit-save-btn').style.display = 'none';
+  document.getElementById('edit-cancel-btn').style.display = 'none';
+}
+
+async function saveEdit(postId) {
+  const body = document.getElementById('post-body-content');
+  const html = body.innerHTML;
+  const nameEl = document.getElementById('commenter-name');
+  const author = (nameEl && nameEl.value.trim()) || 'Editor';
+
+  const version = {
+    html: html,
+    author: author,
+    ts: new Date().toISOString(),
+    preview: body.innerText.replace(/\s+/g, ' ').trim().slice(0, 120) + '…'
+  };
+
+  if (IS_CONFIGURED && _dbRef) {
+    const vhRef = firebase.database().ref(CONFIG.dbPath + '-versions/' + postId);
+    await vhRef.push(version);
+    // Also update live current content
+    await firebase.database().ref(CONFIG.dbPath + '-content/' + postId).set({ html, ts: version.ts, author });
+  } else {
+    // localStorage fallback
+    const key = 'mdm_versions_' + postId;
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    existing.push(version);
+    localStorage.setItem(key, JSON.stringify(existing));
+    renderVersionHistory(existing, postId);
+  }
+
+  _originalHTML = html; // update baseline so cancel doesn't revert
+  cancelEdit();
+  showToast('comment');
+
+  // Post as discussion note
+  const record = { author, text: '✎ Draft edited and saved as new version', status: null, ts: version.ts };
+  if (IS_CONFIGURED && _dbRef) {
+    await firebase.database().ref(CONFIG.dbPath + '-comments/' + postId).push(record);
+  }
+}
+
+function fmt(cmd) {
+  document.execCommand(cmd, false, null);
+  document.getElementById('post-body-content').focus();
+}
+
+function fmtBlock(tag) {
+  document.execCommand('formatBlock', false, tag);
+  document.getElementById('post-body-content').focus();
+}
+
+function wrapLink() {
+  const url = prompt('Enter URL:', 'https://');
+  if (url) document.execCommand('createLink', false, url);
+  document.getElementById('post-body-content').focus();
+}
+
+// ── VERSION HISTORY ───────────────────────────────────────────────────────────
+
+function loadVersionHistory(postId) {
+  if (!IS_CONFIGURED || !_dbRef) {
+    const key = 'mdm_versions_' + postId;
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    renderVersionHistory(existing, postId);
+    return;
+  }
+  const vhRef = firebase.database().ref(CONFIG.dbPath + '-versions/' + postId);
+  vhRef.on('value', snap => {
+    const data = snap.val() || {};
+    const list = Object.entries(data)
+      .map(([k, v]) => ({ ...v, _key: k }))
+      .sort((a, b) => new Date(b.ts) - new Date(a.ts));
+    renderVersionHistory(list, postId);
+  });
+
+  // Also listen for live content updates from other editors
+  const contentRef = firebase.database().ref(CONFIG.dbPath + '-content/' + postId);
+  contentRef.on('value', snap => {
+    const data = snap.val();
+    if (data && !_editingMode) {
+      document.getElementById('post-body-content').innerHTML = data.html;
+    }
+  });
+}
+
+function renderVersionHistory(versions, postId) {
+  const list = document.getElementById('vh-list');
+  const empty = document.getElementById('vh-empty');
+  const count = document.getElementById('vh-count');
+
+  list.querySelectorAll('.vh-entry').forEach(e => e.remove());
+
+  if (!versions.length) {
+    if (empty) empty.style.display = '';
+    count.textContent = '';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  count.textContent = '(' + versions.length + ')';
+
+  versions.forEach((v, i) => {
+    const div = document.createElement('div');
+    div.className = 'vh-entry';
+    const timeStr = new Date(v.ts).toLocaleString('en-US', {
+      month: 'short', day: 'numeric', year: 'numeric',
+      hour: 'numeric', minute: '2-digit'
+    });
+    const isCurrent = i === 0;
+    div.innerHTML = `
+      <div class="vh-entry-meta">
+        <span class="vh-entry-time">${timeStr}</span>
+        <span class="vh-entry-author">Saved by ${v.author || 'Editor'}</span>
+        <div class="vh-entry-preview">${v.preview || ''}</div>
+      </div>
+      ${isCurrent
+        ? '<span class="vh-current-badge">Current</span>'
+        : `<button class="vh-restore-btn" onclick="openRestoreModal(${JSON.stringify(v).replace(/"/g, '&quot;')}, ${postId})">Restore</button>`
+      }
+    `;
+    list.appendChild(div);
+  });
+}
+
+function toggleVH() {
+  const list = document.getElementById('vh-list');
+  const toggle = document.getElementById('vh-toggle');
+  const isOpen = list.classList.contains('open');
+  list.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+
+function openRestoreModal(version, postId) {
+  _pendingRestore = { version, postId };
+  const preview = document.getElementById('restore-preview');
+  preview.innerHTML = version.html;
+  document.getElementById('restore-modal').classList.add('open');
+}
+
+function closeRestoreModal() {
+  _pendingRestore = null;
+  document.getElementById('restore-modal').classList.remove('open');
+}
+
+async function confirmRestore() {
+  if (!_pendingRestore) return;
+  const { version, postId } = _pendingRestore;
+  const body = document.getElementById('post-body-content');
+  body.innerHTML = version.html;
+
+  // Save restored content as a new version
+  const nameEl = document.getElementById('commenter-name');
+  const author = (nameEl && nameEl.value.trim()) || 'Editor';
+  const newVersion = {
+    html: version.html,
+    author: author + ' (restored)',
+    ts: new Date().toISOString(),
+    preview: body.innerText.replace(/\s+/g, ' ').trim().slice(0, 120) + '…'
+  };
+
+  if (IS_CONFIGURED && _dbRef) {
+    await firebase.database().ref(CONFIG.dbPath + '-versions/' + postId).push(newVersion);
+    await firebase.database().ref(CONFIG.dbPath + '-content/' + postId).set({ html: version.html, ts: newVersion.ts, author: newVersion.author });
+  } else {
+    const key = 'mdm_versions_' + postId;
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    existing.unshift(newVersion);
+    localStorage.setItem(key, JSON.stringify(existing));
+    renderVersionHistory(existing, postId);
+  }
+
+  closeRestoreModal();
+  showToast('comment');
+  _originalHTML = version.html;
+}
+
+
+  // Init editor
+  loadVersionHistory(POST_ID);
 </script>
 </body>
 </html>
