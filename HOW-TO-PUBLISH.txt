@@ -1,0 +1,72 @@
+MDM DESIGN STUDIO — BLOG REVIEW PORTAL
+How to Publish & Share with Your Client
+========================================
+
+WHAT'S IN THIS ZIP
+------------------
+  index.html          → Dashboard (the main page your client sees first)
+  style.css           → Shared styles
+  app.js              → Shared logic (approvals, storage, export)
+  posts/
+    post-01.html      → Post 1: From Sketch to Sawdust
+    post-02.html      → Post 2: Why the First Measurement Matters Most
+    ... (all 25 posts)
+
+PUBLISHING IN 60 SECONDS — NETLIFY DROP (FREE)
+-----------------------------------------------
+1. Go to: https://app.netlify.com/drop
+   (No account required for basic hosting)
+
+2. UNZIP the folder "mdm-review-portal" on your computer first.
+
+3. Drag the UNZIPPED "mdm-review-portal" FOLDER onto the Netlify Drop page.
+   !! Important: Drag the folder itself, not the zip file. !!
+
+4. Netlify generates a live URL instantly — something like:
+   https://quirky-name-12345.netlify.app
+
+5. Share that URL with your client. That's it.
+
+TO GIVE IT A NICER URL (Optional, Free)
+-----------------------------------------
+- Create a free Netlify account at netlify.com
+- In your dashboard, go to the site settings
+- Under "Site information" → "Site name" → change to something like:
+  mdm-blog-review.netlify.app
+
+HOW YOUR CLIENT USES IT
+-----------------------
+1. Client opens the URL — sees the dashboard with all 25 posts listed
+2. Clicks any post row to open and read the full content
+3. Uses the 3 floating buttons (bottom-right, always visible while scrolling):
+     ✓ Approve         → green
+     ⚠ Needs Changes   → yellow
+     ✕ Reject          → red
+4. Can add a written note using the "+ Note" button before approving
+5. Dashboard updates automatically — approved/flagged/rejected counts shown in nav
+6. When done, clicks "Export Summary" on the dashboard to download
+   a plain-text report of all decisions + notes to send back to you
+
+IMPORTANT: APPROVALS ARE STORED IN THE BROWSER
+----------------------------------------------
+The approval data saves to the client's browser (localStorage).
+This means:
+  ✓ Works instantly, no login, no backend needed
+  ✓ Persists across browser sessions on the same device
+  ✗ NOT shared in real time — client exports and emails you the summary
+  ✗ If client switches devices, they start fresh
+
+If you want REAL-TIME shared approvals (both of you see live), that requires
+a backend service (e.g. Airtable, Notion, or a simple Firebase integration).
+Let MDM know if you'd like that upgrade.
+
+UPDATING POSTS
+--------------
+Posts 3–25 currently show a summary + metadata and point clients to the
+full draft document. If you want the full text of all 25 posts embedded
+in each page (so it's fully self-contained), the full content can be
+added to each post HTML file in the posts/ folder.
+
+QUESTIONS?
+----------
+Contact MDM Design Studio at info@mdmdesignstudio.com
