@@ -2,125 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>MDM Social Media Review Portal</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MDM Social Review</title>
 <link rel="stylesheet" href="social-style.css">
 <style>
 body { padding-top: 92px; }
-
-/* ── HERO ─────────────────────────────────────────── */
-.hero { padding: 48px 40px 36px; max-width: 900px; margin: 0 auto; }
-.hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .55em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
-.hero-title { font-size: 36px; font-weight: 300; letter-spacing: .04em; color: var(--text); line-height: 1.2; margin-bottom: 8px; }
-.hero-title strong { font-weight: 600; }
-.hero-sub { font-size: 16px; font-weight: 300; color: var(--muted); letter-spacing: .02em; }
-
-/* ── STATS ────────────────────────────────────────── */
-.stats-wrap { max-width: 900px; margin: 0 auto; padding: 0 40px 28px; }
-.stats-row { display: flex; gap: 0; border: 1px solid var(--border); }
-.stat-block { flex: 1; min-width: 80px; padding: 18px 20px; border-right: 1px solid var(--border); }
-.stat-block:last-child { border-right: none; }
-.stat-n { font-size: 36px; font-weight: 300; line-height: 1; margin-bottom: 3px; display: block; }
-.stat-l { font-size: 11px; font-weight: 600; letter-spacing: .4em; text-transform: uppercase; display: block; }
-.stat-block.s-total   .stat-n { color: var(--text2); }  .stat-block.s-total   .stat-l { color: var(--muted); }
-.stat-block.s-approved .stat-n { color: var(--approved-txt); } .stat-block.s-approved .stat-l { color: var(--approved-bd); }
-.stat-block.s-needs   .stat-n { color: var(--needs-txt); }    .stat-block.s-needs   .stat-l { color: var(--needs-bd); }
-.stat-block.s-rejected .stat-n { color: var(--rejected-txt); } .stat-block.s-rejected .stat-l { color: var(--rejected-bd); }
-.stat-block.s-pending .stat-n { color: var(--pending-txt); }  .stat-block.s-pending .stat-l { color: var(--dim); }
-
-/* ── PROGRESS ─────────────────────────────────────── */
-.progress-wrap { max-width: 900px; margin: 0 auto; padding: 0 40px 28px; }
-.progress-meta { display: flex; justify-content: space-between; margin-bottom: 7px; }
-.progress-meta span { font-size: 11px; font-weight: 500; letter-spacing: .4em; color: var(--muted); text-transform: uppercase; }
-.progress-track { height: 3px; background: var(--border); }
-.progress-fill  { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold2)); width: 0%; transition: width .6s ease; }
-
-/* ── FILTERS ──────────────────────────────────────── */
-.filters { max-width: 900px; margin: 0 auto; padding: 0 40px 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 14px; padding-bottom: 14px; }
-.filter-label { font-size: 11px; font-weight: 600; letter-spacing: .45em; color: var(--muted); text-transform: uppercase; margin-right: 4px; }
-.filter-btn { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; padding: 6px 14px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; transition: all .18s; }
-.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
-.filter-btn.active { background: var(--gold); color: var(--darker); border-color: var(--gold); }
-.filter-sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
-.platform-filter { display: flex; align-items: center; gap: 6px; }
-.plat-btn { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; padding: 6px 12px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; transition: all .18s; }
-.plat-btn:hover { border-color: var(--gold); color: var(--gold); }
-.plat-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(196,169,106,.08); }
-
-/* ── POST LIST ────────────────────────────────────── */
-.section-label { font-size: 11px; font-weight: 600; letter-spacing: .5em; color: var(--dim); text-transform: uppercase; padding: 10px 40px; max-width: 900px; margin: 0 auto; border-top: 1px solid var(--border); }
-.post-list { max-width: 900px; margin: 0 auto; }
-
-.post-row {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: inherit;
-  border-top: 1px solid var(--border2);
-  border-left: 3px solid transparent;
-  padding: 0 40px;
-  min-height: 72px;
-  transition: all .18s;
-  gap: 0;
-}
-.post-row:hover { background: var(--panel); border-left-color: var(--gold); }
-.post-row[data-status="approved"] { border-left-color: var(--approved-bd); }
-.post-row[data-status="needs"]    { border-left-color: var(--needs-bd); }
-.post-row[data-status="rejected"] { border-left-color: var(--rejected-bd); }
-
-/* Thumbnail */
-.col-thumb { width: 48px; height: 48px; flex-shrink: 0; background: var(--border); margin-right: 16px; overflow: hidden; position: relative; }
-.col-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.col-thumb .no-thumb { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--dim); }
-
-/* Platform badge */
-.col-plat { width: 44px; flex-shrink: 0; margin-right: 14px; }
-.plat-badge { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: 3px 6px; border: 1px solid; border-radius: 2px; white-space: nowrap; }
-.plat-badge.instagram { color: #C87CC0; border-color: #5A2858; background: #1A0E1A; }
-.plat-badge.facebook  { color: #6090D8; border-color: #1A3060; background: #0A0E1A; }
-.plat-badge.both      { color: var(--gold); border-color: var(--border); background: var(--panel); }
-
-/* Date */
-.col-date { width: 90px; flex-shrink: 0; margin-right: 20px; }
-.col-date .weekday { font-size: 10px; font-weight: 600; letter-spacing: .3em; color: var(--muted); text-transform: uppercase; display: block; }
-.col-date .date    { font-size: 14px; font-weight: 400; color: var(--text2); display: block; margin-top: 2px; }
-
-/* Caption */
-.col-caption { flex: 1; min-width: 0; padding-right: 16px; }
-.col-caption .cap-text { font-size: 14px; font-weight: 300; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
-.col-caption .cap-meta { font-size: 11px; font-weight: 400; letter-spacing: .15em; color: var(--dim); margin-top: 3px; display: flex; gap: 10px; flex-wrap: wrap; }
-.cap-meta-tag { color: var(--muted); }
-
-/* Status */
-.col-status { width: 110px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
-.dash-comment { font-size: 14px; }
-.col-arrow { color: var(--dim); font-size: 16px; margin-left: 10px; flex-shrink: 0; }
-
-/* ── FOOTER ───────────────────────────────────────── */
-.portal-footer { max-width: 900px; margin: 0 auto; padding: 36px 40px 80px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-.footer-brand { font-size: 11px; font-weight: 600; letter-spacing: .5em; color: var(--dim); text-transform: uppercase; }
-.footer-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.footer-btn { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; padding: 9px 18px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; transition: all .18s; text-decoration: none; }
-.footer-btn:hover { border-color: var(--gold); color: var(--gold); }
-.footer-btn.primary { background: var(--gold); color: var(--darker); border-color: var(--gold); }
-.footer-btn.primary:hover { opacity: .85; }
-
-/* ── MOBILE ───────────────────────────────────────── */
-@media (max-width: 700px) {
-  .hero, .stats-wrap, .progress-wrap, .filters { padding-left: 16px; padding-right: 16px; }
-  .hero { padding-top: 28px; padding-bottom: 20px; }
-  .hero-title { font-size: 26px; }
-  .stats-row { display: grid; grid-template-columns: 1fr 1fr; }
-  .stat-block { border-bottom: 1px solid var(--border); }
-  .stat-block:last-child { grid-column: 1/-1; border-right: none; }
-  .stat-block:nth-child(2), .stat-block:nth-child(4) { border-right: none; }
-  .section-label { padding-left: 16px; padding-right: 16px; }
-  .post-row { padding: 0 16px; min-height: 60px; }
-  .col-date { display: none; }
-  .col-status { width: 80px; }
-  .col-thumb { width: 40px; height: 40px; }
-  .portal-footer { padding: 24px 16px 60px; flex-direction: column; align-items: flex-start; }
-}
+.filters { max-width:920px; margin:0 auto; padding:0 40px 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; border-top:1px solid var(--border); padding-top:13px; padding-bottom:13px; }
+.filter-label { font-size:11px; font-weight:600; letter-spacing:.45em; color:var(--muted); text-transform:uppercase; margin-right:2px; }
+.filter-btn { font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:.35em; text-transform:uppercase; padding:6px 14px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all .18s; }
+.filter-btn:hover { border-color:var(--gold); color:var(--gold); }
+.filter-btn.active { background:var(--gold); color:var(--darker); border-color:var(--gold); }
+.filter-sep { width:1px; height:20px; background:var(--border); margin:0 4px; }
 </style>
 </head>
 <body>
@@ -144,10 +36,10 @@ body { padding-top: 92px; }
 <!-- PORTAL SWITCHER -->
 <div class="portal-switcher">
   <a href="index.html" class="portal-switch-link">
-    <span class="portal-switch-icon">📝</span> Blog Review
+    <span>📝</span> Blog Review
   </a>
   <a href="social-index.html" class="portal-switch-link active">
-    <span class="portal-switch-icon">📲</span> Social Review
+    <span>📲</span> Social Review
   </a>
 </div>
 
@@ -155,18 +47,18 @@ body { padding-top: 92px; }
 <div class="hero">
   <p class="hero-eyebrow">MDM Design Studio · 2026</p>
   <h1 class="hero-title"><strong>Social Media</strong> Review Portal</h1>
-  <p class="hero-sub">Review, edit, and approve upcoming Instagram &amp; Facebook posts.</p>
+  <p class="hero-sub">Review and approve upcoming Instagram &amp; Facebook posts — changes sync live across all devices.</p>
 </div>
 <div class="gold-rule"></div>
 
 <!-- STATS -->
 <div class="stats-wrap">
   <div class="stats-row">
-    <div class="stat-block s-total">   <span class="stat-n" id="stat-total">—</span><span class="stat-l">Total</span></div>
+    <div class="stat-block s-total">   <span class="stat-n" id="stat-total">2</span><span class="stat-l">Total</span></div>
     <div class="stat-block s-approved"><span class="stat-n" id="count-approved">0</span><span class="stat-l">Approved</span></div>
     <div class="stat-block s-needs">   <span class="stat-n" id="count-needs">0</span><span class="stat-l">Changes</span></div>
     <div class="stat-block s-rejected"><span class="stat-n" id="count-rejected">0</span><span class="stat-l">Rejected</span></div>
-    <div class="stat-block s-pending"> <span class="stat-n" id="count-pending">—</span><span class="stat-l">Pending</span></div>
+    <div class="stat-block s-pending"> <span class="stat-n" id="count-pending">2</span><span class="stat-l">Pending</span></div>
   </div>
 </div>
 
@@ -187,83 +79,57 @@ body { padding-top: 92px; }
   <button class="filter-btn" onclick="setFilter('approved',this)">Approved</button>
   <button class="filter-btn" onclick="setFilter('needs',this)">Changes</button>
   <button class="filter-btn" onclick="setFilter('rejected',this)">Rejected</button>
-  <div class="filter-sep"></div>
-  <span class="filter-label">Platform</span>
-  <div class="platform-filter">
-    <button class="plat-btn active" onclick="setPlatform('all',this)">All</button>
-    <button class="plat-btn" onclick="setPlatform('instagram',this)">Instagram</button>
-    <button class="plat-btn" onclick="setPlatform('facebook',this)">Facebook</button>
-    <button class="plat-btn" onclick="setPlatform('both',this)">Both</button>
-  </div>
 </div>
 
 <!-- POST LIST -->
 <p class="section-label">Scheduled Posts</p>
-<div class="post-list" id="post-list">
-  <!-- Rows injected by JS -->
-</div>
+<div class="post-list" id="post-list"></div>
 
 <!-- FOOTER -->
 <div class="portal-footer">
   <span class="footer-brand">MDM Design Studio · Social Review 2026</span>
-  <div class="footer-actions">
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
     <button class="footer-btn" onclick="exportSummary()">↓ Export Summary</button>
     <a href="index.html" class="footer-btn">Blog Portal →</a>
   </div>
 </div>
 
-<!-- Firebase + EmailJS -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="social-app.js"></script>
 <script src="social-posts-data.js"></script>
 <script>
-let _currentFilter   = 'all';
-let _currentPlatform = 'all';
+let _currentFilter = 'all';
 
-function buildDashboard() {
-  const list  = document.getElementById('post-list');
-  const total = document.getElementById('stat-total');
-  if (total) total.textContent = SOCIAL_POSTS.length;
-
+function buildRows() {
+  const list = document.getElementById('post-list');
   list.innerHTML = '';
   SOCIAL_POSTS.forEach(p => {
-    const d        = _localCache[p.id] || { status:'pending' };
-    const platClass = (p.platform||'both').toLowerCase();
-    const platLabel = { instagram:'IG', facebook:'FB', both:'IG+FB' }[platClass] || platClass.toUpperCase();
-    const capPreview = (p.caption||'').slice(0,80) + ((p.caption||'').length>80?'…':'');
-    const metaParts  = [
-      p.location   ? '📍 '+p.location : null,
-      p.hashtags   ? p.hashtags.split(/[\s,]+/).slice(0,3).join(' ') : null,
-    ].filter(Boolean);
-
-    const row = document.createElement('a');
-    row.className      = 'post-row';
-    row.id             = 'row-' + p.id;
-    row.href           = 'social-post-' + String(p.id).padStart(2,'0') + '.html';
-    row.dataset.status   = d.status || 'pending';
-    row.dataset.platform = platClass;
-
-    const badgeLabel = { pending:'Pending', approved:'Approved', needs:'Changes', rejected:'Rejected' }[d.status||'pending']||'Pending';
-
+    const d          = _localCache[p.id] || { status:'pending' };
+    const capPreview = (p.caption||'').slice(0,90) + ((p.caption||'').length>90?'…':'');
+    const row        = document.createElement('a');
+    row.className    = 'post-row';
+    row.id           = 'row-'+p.id;
+    row.href         = 'social-post-0'+p.id+'.html';
+    row.dataset.status = d.status||'pending';
+    const badgeLabel = {pending:'Pending',approved:'Approved',needs:'Changes',rejected:'Rejected'}[d.status||'pending'];
     row.innerHTML = `
-      <div class="col-thumb"><div class="no-thumb">${p.mediaEmoji||'🖼'}</div></div>
-      <div class="col-plat"><span class="plat-badge ${platClass}">${platLabel}</span></div>
+      <div class="col-thumb"><img src="${p.photo}" alt="" onerror="this.parentNode.innerHTML='<div style=width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:22px>${p.mediaEmoji}</div>'"></div>
+      <div class="col-num">0${p.id}</div>
       <div class="col-date">
-        <span class="weekday">${p.dayOfWeek||''}</span>
-        <span class="date">${p.postDate||'TBD'}</span>
+        <span class="weekday">${p.dayOfWeek}</span>
+        <span class="date">${p.postDate}</span>
       </div>
       <div class="col-caption">
-        <span class="cap-text">${capPreview||'(no caption yet)'}</span>
-        <span class="cap-meta">${metaParts.map(m=>`<span class="cap-meta-tag">${m}</span>`).join('')}</span>
+        <span class="cap-text">${capPreview}</span>
+        <span class="cap-meta">Instagram + Facebook · ${p.postTime}</span>
       </div>
       <div class="col-status">
         <span class="dash-comment" title="${d.comment||''}">${d.comment?'💬':''}</span>
         <span class="dash-status status-badge ${d.status||'pending'}"><span class="badge-text">${badgeLabel}</span></span>
       </div>
-      <div class="col-arrow">›</div>
-    `;
+      <div class="col-arrow">›</div>`;
     list.appendChild(row);
   });
 }
@@ -272,47 +138,42 @@ function setFilter(f, btn) {
   _currentFilter = f;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  applyFilters();
-}
-
-function setPlatform(p, btn) {
-  _currentPlatform = p;
-  document.querySelectorAll('.plat-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  applyFilters();
-}
-
-function applyFilters() {
   document.querySelectorAll('.post-row').forEach(row => {
-    const matchStatus   = _currentFilter === 'all'   || row.dataset.status   === _currentFilter;
-    const matchPlatform = _currentPlatform === 'all' || row.dataset.platform === _currentPlatform || row.dataset.platform === 'both';
-    row.style.display = (matchStatus && matchPlatform) ? '' : 'none';
+    row.style.display = (f==='all' || row.dataset.status===f) ? '' : 'none';
   });
 }
 
-// Override renderDashboard to refresh rows
-const _origRender = renderDashboard;
+// Override renderDashboard to also rebuild rows
+const _origRD = renderDashboard;
 window.renderDashboard = function() {
-  buildDashboard();
-  applyFilters();
+  buildRows();
+  document.querySelectorAll('.post-row').forEach(row => {
+    row.style.display = (_currentFilter==='all' || row.dataset.status===_currentFilter) ? '' : 'none';
+  });
   updateCounts();
   updateNavPills();
-  const total = document.getElementById('stat-total');
-  if (total) total.textContent = SOCIAL_POSTS.length;
 };
 
 // Live indicator
-firebase.database().ref('.info/connected').on('value', snap => {
-  const liveEl = document.getElementById('live-indicator');
-  if (!liveEl) return;
-  if (snap.val()) { liveEl.textContent = 'Live'; liveEl.className = 'live-dot connected'; }
-  else { liveEl.textContent = 'Offline'; liveEl.className = 'live-dot offline'; }
-});
+if (typeof firebase !== 'undefined') {
+  firebase.database && firebase.initializeApp && null; // already handled by initFirebase
+}
 
-// Init
 emailjs.init(CONFIG.emailjsPublicKey);
 initFirebase();
-buildDashboard();
+buildRows();
+
+// Wire live indicator after Firebase init
+setTimeout(() => {
+  if (typeof firebase !== 'undefined' && firebase.apps.length) {
+    firebase.database().ref('.info/connected').on('value', snap => {
+      const el = document.getElementById('live-indicator');
+      if (!el) return;
+      if (snap.val()) { el.textContent='Live'; el.className='live-dot connected'; }
+      else { el.textContent='Offline'; el.className='live-dot offline'; }
+    });
+  }
+}, 500);
 </script>
 </body>
 </html>
