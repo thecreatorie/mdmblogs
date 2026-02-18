@@ -114,6 +114,29 @@ body { padding-top: 56px; }
   .col-num .of25 { display: none; }
   .portal-footer { padding: 28px 18px 60px; }
   .footer-grid { grid-template-columns: 1fr; gap: 18px; }
+
+  /* Stats: 2×2 grid on mobile so all 5 are readable */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: visible;
+    border-bottom: none;
+  }
+  .stat-block {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 16px;
+    min-width: 0;
+  }
+  /* Last item (5th) spans full width so it doesn't look orphaned */
+  .stat-block:last-child {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+  /* Remove double borders between cells */
+  .stat-block:nth-child(2) { border-right: none; }
+  .stat-block:nth-child(4) { border-right: none; }
+  .stat-n { font-size: 32px; }
 }
 </style>
 </head>

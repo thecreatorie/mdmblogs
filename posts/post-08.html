@@ -6,39 +6,63 @@
 <title>Our Most Common Client Regrets — MDM Design Studio</title>
 <link rel="stylesheet" href="../style.css">
 <style>
-body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 0); }
+body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 120px); }
 .post-header { background: var(--dark); padding: 48px 0 40px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
-.post-header::before { content:''; position:absolute; inset:0; background-image: linear-gradient(var(--border2) 1px,transparent 1px),linear-gradient(90deg,var(--border2) 1px,transparent 1px); background-size:48px 48px; opacity:.3; }
+.post-header::before { content:''; position:absolute; inset:0; background-image: linear-gradient(var(--border2) 1px,transparent 1px),linear-gradient(90deg,var(--border2) 1px,transparent 1px); background-size:48px 48px; opacity:.3; pointer-events:none; }
 .phi { position:relative; z-index:1; max-width:740px; margin:0 auto; padding:0 40px; }
 .post-meta-row { display:flex; align-items:center; gap:14px; margin-bottom:20px; flex-wrap:wrap; }
-.post-num-badge { font-size:16px; font-weight:600; letter-spacing:.5em; color:var(--gold); text-transform:uppercase; border:1px solid var(--border); padding:5px 12px; background:var(--darker); }
-.post-date-str { font-size:16px; font-weight:400; letter-spacing:.3em; color:var(--muted); text-transform:uppercase; }
-.post-cat { font-size:16px; font-weight:500; letter-spacing:.45em; color:var(--gold); text-transform:uppercase; }
-.post-title { font-family:'Montserrat',sans-serif; font-weight:400; font-size:38px; line-height:1.15; letter-spacing:.02em; color:var(--text); margin-bottom:10px; }
-.post-subtitle { font-family:'Montserrat',sans-serif; font-style:italic; font-weight:300; font-size:20px; color:var(--gold); margin-bottom:24px; line-height:1.3; }
+.post-num-badge { font-size:16px; font-weight:600; letter-spacing:.3em; color:var(--gold); text-transform:uppercase; border:1px solid var(--border); padding:5px 12px; background:var(--darker); }
+.post-date-str { font-size:16px; font-weight:400; letter-spacing:.15em; color:var(--muted); text-transform:uppercase; }
+.post-cat { font-size:16px; font-weight:500; letter-spacing:.3em; color:var(--gold); text-transform:uppercase; }
+.post-title { font-family:'Montserrat',sans-serif; font-weight:600; font-size:32px; line-height:1.2; letter-spacing:.01em; color:var(--text); margin-bottom:10px; }
+.post-subtitle { font-family:'Montserrat',sans-serif; font-style:italic; font-weight:300; font-size:20px; color:var(--gold); margin-bottom:24px; line-height:1.4; }
 .seo-box { background:var(--panel); border:1px solid var(--border); border-left:2px solid var(--gold); padding:13px 18px; margin-top:22px; }
-.seo-box .seo-lbl { font-size:16px; font-weight:600; letter-spacing:.45em; color:var(--gold); text-transform:uppercase; margin-bottom:5px; display:block; }
+.seo-box .seo-lbl { font-size:16px; font-weight:600; letter-spacing:.3em; color:var(--gold); text-transform:uppercase; margin-bottom:5px; display:block; }
 .seo-box p { font-size:16px; font-weight:300; color:var(--text2); line-height:1.6; }
 .pbw { max-width:740px; margin:0 auto; padding:48px 40px 0; }
-.post-body h2 { font-family:'Montserrat',sans-serif; font-weight:500; font-size:24px; letter-spacing:.02em; color:var(--text); margin:36px 0 14px; line-height:1.25; }
-.post-body h3 { font-family:'Montserrat',sans-serif; font-weight:500; font-size:16px; letter-spacing:.12em; color:var(--gold); text-transform:uppercase; margin:24px 0 10px; }
-.post-body p { font-size:16px; font-weight:300; line-height:1.9; color:var(--text2); margin-bottom:18px; letter-spacing:.01em; }
+.post-body h2 { font-family:'Montserrat',sans-serif; font-weight:600; font-size:22px; letter-spacing:.01em; color:var(--text); margin:36px 0 14px; line-height:1.3; }
+.post-body h3 { font-family:'Montserrat',sans-serif; font-weight:500; font-size:18px; letter-spacing:.08em; color:var(--gold); text-transform:uppercase; margin:24px 0 10px; }
+.post-body p { font-size:17px; font-weight:300; line-height:1.9; color:var(--text2); margin-bottom:18px; letter-spacing:.01em; }
 .post-body em { font-style:italic; color:var(--text); }
-.post-body strong { font-weight:500; color:var(--text); }
+.post-body strong { font-weight:600; color:var(--text); }
 .post-body a { color:var(--gold); text-decoration:none; border-bottom:1px solid transparent; transition:border-color .2s; }
 .post-body a:hover { border-bottom-color:var(--gold); }
-.post-body ul { padding-left:0; margin-bottom:18px; list-style:none; }
-.post-body li { font-size:16px; font-weight:300; line-height:1.8; color:var(--text2); padding:5px 0 5px 18px; position:relative; border-bottom:1px solid var(--border2); }
-.post-body li::before { content:'—'; position:absolute; left:0; color:var(--gold); }
-.post-body p.cta-text { margin-top:36px; padding:22px 26px; background:var(--panel); border:1px solid var(--border); border-left:2px solid var(--gold); font-size:16px; font-style:italic; color:var(--text2); }
-.post-nav-outer { max-width:740px; margin:0 auto; padding:36px 40px 120px; display:flex; justify-content:space-between; align-items:flex-start; gap:14px; }
+.post-body p.cta-text { margin-top:36px; padding:22px 26px; background:var(--panel); border:1px solid var(--border); border-left:2px solid var(--gold); font-size:17px; font-style:italic; color:var(--text2); }
+
+/* ── DISCUSSION SECTION ── */
+.discussion-outer { max-width:740px; margin:0 auto; padding:48px 40px 0; }
+.discussion-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:16px; }
+.discussion-title { font-size:16px; font-weight:600; letter-spacing:.35em; color:var(--gold); text-transform:uppercase; }
+.discussion-subtitle { font-size:16px; color:var(--muted); font-weight:300; margin-top:4px; }
+.comment-form { background:var(--panel); border:1px solid var(--border); padding:20px; margin-bottom:28px; }
+.comment-form-row { display:flex; gap:10px; margin-bottom:12px; }
+.comment-name-input { flex:1; font-family:'Montserrat',sans-serif; font-size:16px; font-weight:400; background:var(--darker); border:1px solid var(--border); color:var(--text); padding:11px 14px; outline:none; transition:border-color .2s; }
+.comment-name-input:focus { border-color:var(--gold); }
+.comment-textarea { width:100%; box-sizing:border-box; font-family:'Montserrat',sans-serif; font-size:16px; font-weight:300; background:var(--darker); border:1px solid var(--border); color:var(--text); padding:12px 14px; resize:vertical; min-height:90px; outline:none; transition:border-color .2s; }
+.comment-textarea:focus { border-color:var(--gold); }
+.comment-submit { font-family:'Montserrat',sans-serif; font-size:16px; font-weight:600; letter-spacing:.25em; text-transform:uppercase; padding:11px 24px; background:var(--gold); color:var(--darker); border:none; cursor:pointer; transition:opacity .18s; margin-top:8px; }
+.comment-submit:hover { opacity:.85; }
+.comments-list { display:flex; flex-direction:column; gap:16px; margin-bottom:60px; }
+.comment-item { background:var(--panel); border:1px solid var(--border); padding:18px 20px; }
+.comment-item.highlight { border-left:2px solid var(--gold); }
+.comment-meta { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.comment-author { font-size:16px; font-weight:600; color:var(--text); letter-spacing:.05em; }
+.comment-time { font-size:16px; color:var(--muted); font-weight:300; }
+.comment-status-tag { font-size:16px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; padding:3px 9px; border-radius:2px; }
+.comment-status-tag.approved { background:var(--approved-bg); color:var(--approved-txt); border:1px solid var(--approved-bd); }
+.comment-status-tag.needs { background:var(--needs-bg); color:var(--needs-txt); border:1px solid var(--needs-bd); }
+.comment-status-tag.rejected { background:var(--rejected-bg); color:var(--rejected-txt); border:1px solid var(--rejected-bd); }
+.comment-body { font-size:17px; font-weight:300; color:var(--text2); line-height:1.75; }
+.no-comments { font-size:16px; color:var(--dim); font-style:italic; padding:16px 0; }
+.sync-note { font-size:16px; color:var(--muted); display:flex; align-items:center; gap:6px; }
+.post-nav-outer { max-width:740px; margin:0 auto; padding:36px 40px 40px; display:flex; justify-content:space-between; align-items:flex-start; gap:14px; }
 @media(max-width:600px) {
-  .phi,.pbw { padding-left:16px; padding-right:16px; }
-  .post-title { font-size:26px; }
-  .post-subtitle { font-size:16px; }
-  .post-body p,.post-body li { font-size:16px; }
-  .post-nav-outer { padding:24px 16px 140px; flex-direction:column; }
-  .post-nav-btn.right { flex-direction:row; text-align:left; }
+  .phi,.pbw,.discussion-outer,.post-nav-outer { padding-left:16px; padding-right:16px; }
+  .post-title { font-size:24px; }
+  .post-subtitle { font-size:18px; }
+  .post-body h2 { font-size:20px; }
+  .comment-form-row { flex-direction:column; }
+  .post-nav-outer { padding-top:24px; flex-direction:column; }
 }
 </style>
 </head>
@@ -74,7 +98,7 @@ body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 0); }
     </div>
     <div class="seo-box">
       <span class="seo-lbl">SEO Meta Description</span>
-      <p>Even the best custom furniture projects can leave clients wishing they'd done something differently. MDM Design Studio shares the most common regrets.</p>
+      <p>Even the best custom furniture projects can leave clients wishing they'd done something differently. MDM Design Studio shares the most common regrets — and how our process helps clients dodge them.</p>
     </div>
   </div>
 </div>
@@ -82,25 +106,76 @@ body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 0); }
 
 <div class="pbw">
   <div class="post-body">
-    <p>Even the best custom furniture projects can leave clients wishing they'd done something differently. MDM Design Studio shares the most common regrets.</p>
-<h2>About This Post</h2>
-<p>Scheduled to publish as part of the MDM Design Studio 2026 blog series. The full draft covers <em>Our Most Common Client Regrets</em> with approximately 700–1,000 words, H2/H3 subheadings, internal links, and a call to action. Refer to the MDM 2026 Blog Drafts document for the complete text.</p>
-<p class="cta-text">Read the full draft in the blog document, then use the floating buttons at the bottom of this screen to mark your decision. Add a note if you have specific feedback.</p>
+    <p>After years of designing and building custom furniture and cabinetry, we've accumulated a lot of wisdom — including the wisdom that comes from watching clients wish they'd done something differently. These regrets aren't failures of the pieces themselves. They're decisions that seemed reasonable at the time and only revealed their limitations in daily use.</p>
+<p>The good news: every regret on this list is avoidable. Here's what we hear most often, and how our design process is specifically built to prevent each one.</p>
+
+<h2>"I wish I had more drawers."</h2>
+<p>This is the single most common piece of feedback we hear from cabinetry clients after they've lived with a kitchen or bathroom for a year. People consistently underestimate how much of their storage is better served by drawers than by shelves behind doors. A deep drawer that lets you see everything at once, pull it forward, and put it back is dramatically more functional than a lower cabinet with a door and a shelf — where everything in the back gets lost and forgotten.</p>
+<p><strong>How we avoid it:</strong> We ask specifically about what's going in each cabinet during the design phase and push clients to think through their actual use patterns. We'll often recommend more drawers than clients initially request, and we explain why.</p>
+
+<h2>"I should have gone taller / wider / deeper."</h2>
+<p>Scale regret is common, especially in built-ins and storage pieces. A bookcase that seemed appropriately sized on a drawing can read as too modest once it's in the room, particularly when the ceiling height invited something more dramatic. Drawers that seemed deep enough turn out to be just slightly too shallow for the items going in them.</p>
+<p><strong>How we avoid it:</strong> We use renderings and mockups to help clients visualize scale before anything is built. We also ask pointed questions about the specific items going in each drawer and shelf to verify that the proposed dimensions will work.</p>
+
+<h2>"I wish I'd added lighting."</h2>
+<p>Integrated lighting — inside display cabinets, under wall cabinets in a kitchen, along the interior of a wardrobe — is dramatically easier to add during the build than as a retrofit. Running wire, installing recessed LED channels, and hiding junction boxes are all straightforward when the piece is being built. Adding them later involves opening casework, fishing wire, and often compromising the finish.</p>
+<p><strong>How we avoid it:</strong> We raise the question of integrated lighting proactively in our design process. Even if a client says no initially, we can run wire conduit during the build so that the option remains open later.</p>
+
+<h2>"I didn't think through the hardware carefully enough."</h2>
+<p>Hardware chosen quickly at the end of the design process — whatever was available, whatever was in stock — often reads as an afterthought on an otherwise considered piece. The wrong finish, the wrong proportion, or the wrong style can undermine months of careful design decisions.</p>
+<p><strong>How we avoid it:</strong> We treat hardware selection as a formal step in the design process, presenting options in context and in relation to the overall room palette. We order samples where the choice isn't obvious.</p>
+
+<h2>"I wish I'd done the whole wall."</h2>
+<p>A run of cabinetry or shelving that stops short of the full wall — leaving a few feet of blank space on either end — almost always reads as incomplete. Full-wall built-ins have a visual completeness and authority that partial runs don't achieve.</p>
+<p><strong>How we avoid it:</strong> When a client proposes a run of built-ins that stops short of the full wall without a clear architectural reason, we note it and discuss the options. Sometimes budget is the real constraint, in which case we can design a solution that allows for future extension.</p>
+
+<h2>"I was too conservative with the finish."</h2>
+<p>Clients sometimes choose the safest finish option available — the most neutral stain, the most expected paint color — and later wish they'd committed to something more personal. Custom furniture is one of the few places where you truly control every variable, including the one most people leave to convention.</p>
+<p><strong>How we avoid it:</strong> We actively encourage clients to consider the bolder version of their vision during the design conversation. We share examples of projects where clients made confident finish choices and loved the results. We want your piece to feel like <em>you</em>, not like a showroom.</p>
+
+<p class="cta-text">We've built a process specifically designed to surface these decisions at the right moment, before they become regrets. <a href="https://mdmdesignstudio.com/get-a-quote/">Get a quote</a> and let's work through the details together — all of them.</p>
+  </div>
+</div>
+
+<!-- DISCUSSION -->
+<div class="discussion-outer">
+  <div class="discussion-header">
+    <div>
+      <div class="discussion-title">Discussion</div>
+      <div class="discussion-subtitle">Notes and feedback — visible to everyone</div>
+    </div>
+    <span class="sync-note" id="sync-note">
+      <span class="live-dot" id="disc-live" style="display:inline-flex;margin:0;"></span>
+      Live
+    </span>
+  </div>
+
+  <div class="comment-form">
+    <div class="comment-form-row">
+      <input type="text" class="comment-name-input" id="commenter-name" placeholder="Your name" maxlength="60">
+    </div>
+    <textarea class="comment-textarea" id="comment-text" placeholder="Leave a note, question, or feedback on this post — everyone can see it…"></textarea>
+    <br>
+    <button class="comment-submit" onclick="submitComment(8)">Post Note</button>
+  </div>
+
+  <div class="comments-list" id="comments-list">
+    <p class="no-comments" id="no-comments-msg">No notes yet. Be the first to leave one.</p>
   </div>
 </div>
 
 <div class="post-nav-outer">
-  <a class="post-nav-btn left" href="post-07.html"><span class="nav-arrow">‹</span><div><span class="nav-meta">Previous</span><span class="nav-name">Consumer Guide</span></div></a>
-  <div class="post-nav-center" style="padding-top:16px;font-size:16px;font-weight:500;letter-spacing:.4em;color:var(--muted);text-transform:uppercase;">Post 8 of 25</div>
-  <a class="post-nav-btn right" href="post-09.html"><div><span class="nav-meta">Next</span><span class="nav-name">Trust Building</span></div><span class="nav-arrow">›</span></a>
+  <a class="post-nav-btn left" href="post-07.html"><span class="nav-arrow">‹</span><div><span class="nav-meta">Previous</span><span class="nav-name">The Real Cost of Custom Furniture</span></div></a>
+  <div style="padding-top:16px;font-size:16px;font-weight:500;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;">Post 8 of 25</div>
+  <a class="post-nav-btn right" href="post-09.html"><div><span class="nav-meta">Next</span><span class="nav-name">When a Project Goes Sideways</span></div><span class="nav-arrow">›</span></a>
 </div>
 
 <!-- FLOATING REVIEW BAR -->
 <div class="fab">
   <div class="fab-label">Your Review</div>
   <div class="fab-comment-box" id="fab-comment-box">
-    <textarea class="fab-textarea" id="fab-textarea" placeholder="Leave a note for MDM (optional)…" rows="3"></textarea>
-    <button class="fab-save-comment" onclick="saveComment(8)">Save Note</button>
+    <textarea class="fab-textarea" id="fab-textarea" placeholder="Leave a note visible to everyone…" rows="3"></textarea>
+    <button class="fab-save-comment" onclick="fabSaveNote(8)">Post Note</button>
   </div>
   <div class="fab-buttons">
     <button class="fab-comment-toggle" onclick="toggleCommentBox()">+ Note</button>
@@ -115,24 +190,150 @@ body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 0); }
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="../app.js"></script>
 <script>
-  const liveEl = document.getElementById('live-indicator');
-  window.addEventListener('DOMContentLoaded', () => {
-    if (typeof emailjs !== 'undefined' && CONFIG.emailjsPublicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
-      emailjs.init(CONFIG.emailjsPublicKey);
-    }
-    initFirebase();
-    initPostPage(8);
-    if (IS_CONFIGURED) {
-      const connRef = firebase.database().ref('.info/connected');
-      connRef.on('value', snap => {
-        liveEl.textContent = snap.val() ? 'Live' : 'Offline';
-        liveEl.className = 'live-dot ' + (snap.val() ? 'connected' : 'offline');
-      });
-    } else {
-      liveEl.textContent = 'Local';
-      liveEl.className = 'live-dot offline';
-    }
+const POST_ID = 8;
+const liveEl = document.getElementById('live-indicator');
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (typeof emailjs !== 'undefined' && CONFIG.emailjsPublicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+    emailjs.init(CONFIG.emailjsPublicKey);
+  }
+  initFirebase();
+  initPostPage(POST_ID);
+  loadComments(POST_ID);
+
+  if (IS_CONFIGURED) {
+    const connRef = firebase.database().ref('.info/connected');
+    connRef.on('value', snap => {
+      const c = snap.val();
+      liveEl.textContent = c ? 'Live' : 'Offline';
+      liveEl.className = 'live-dot ' + (c ? 'connected' : 'offline');
+      const dl = document.getElementById('disc-live');
+      if (dl) dl.className = 'live-dot ' + (c ? 'connected' : 'offline');
+    });
+  } else {
+    liveEl.textContent = 'Local';
+    liveEl.className = 'live-dot offline';
+  }
+});
+
+// ── Comments ──────────────────────────────────────────────────────────────────
+
+function loadComments(postId) {
+  if (!IS_CONFIGURED || !_dbRef) { renderComments([]); return; }
+  const commentsRef = firebase.database().ref(CONFIG.dbPath + '-comments/' + postId);
+  commentsRef.on('value', snap => {
+    const data = snap.val() || {};
+    const list = Object.values(data).sort((a,b) => new Date(a.ts) - new Date(b.ts));
+    renderComments(list);
   });
+}
+
+function renderComments(comments) {
+  const el = document.getElementById('comments-list');
+  const noMsg = document.getElementById('no-comments-msg');
+  if (!comments.length) {
+    if (noMsg) noMsg.style.display = '';
+    // Clear any existing cards
+    el.querySelectorAll('.comment-item').forEach(c => c.remove());
+    return;
+  }
+  if (noMsg) noMsg.style.display = 'none';
+  el.querySelectorAll('.comment-item').forEach(c => c.remove());
+  comments.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'comment-item' + (c.status && c.status !== 'pending' ? ' highlight' : '');
+    const statusTag = c.status && c.status !== 'pending'
+      ? `<span class="comment-status-tag ${c.status}">${{approved:'✓ Approved',needs:'⚠ Changes',rejected:'✕ Rejected'}[c.status] || c.status}</span>`
+      : '';
+    const timeStr = new Date(c.ts).toLocaleString('en-US', {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+    div.innerHTML = `
+      <div class="comment-meta">
+        <span class="comment-author">${c.author || 'Anonymous'}</span>
+        <span class="comment-time">${timeStr}</span>
+        ${statusTag}
+      </div>
+      <div class="comment-body">${c.text}</div>
+    `;
+    el.appendChild(div);
+  });
+}
+
+async function submitComment(postId) {
+  const nameEl = document.getElementById('commenter-name');
+  const textEl = document.getElementById('comment-text');
+  const name = (nameEl.value || '').trim() || 'Anonymous';
+  const text = (textEl.value || '').trim();
+  if (!text) return;
+
+  const record = {
+    author: name,
+    text: text,
+    status: null,
+    ts: new Date().toISOString()
+  };
+
+  if (IS_CONFIGURED && _dbRef) {
+    const commentsRef = firebase.database().ref(CONFIG.dbPath + '-comments/' + postId);
+    await commentsRef.push(record);
+  } else {
+    // Local fallback — append to rendered list
+    const list = [];
+    list.push(record);
+    renderComments(list);
+  }
+
+  textEl.value = '';
+  showToast('comment');
+}
+
+// Override fabSaveNote to also post as comment with status
+async function fabSaveNote(postId) {
+  const ta = document.getElementById('fab-textarea');
+  const nameEl = document.getElementById('commenter-name');
+  const text = ta ? ta.value.trim() : '';
+  if (!text) { toggleCommentBox(); return; }
+
+  const d = getPostData(postId);
+  const name = (nameEl && nameEl.value.trim()) || 'MDM Team';
+  await setPostData(postId, d.status || 'pending', text);
+
+  // Also post as public comment
+  const record = {
+    author: name,
+    text: text,
+    status: d.status !== 'pending' ? d.status : null,
+    ts: new Date().toISOString()
+  };
+  if (IS_CONFIGURED && _dbRef) {
+    const commentsRef = firebase.database().ref(CONFIG.dbPath + '-comments/' + postId);
+    await commentsRef.push(record);
+  }
+
+  if (ta) ta.value = '';
+  toggleCommentBox();
+  showToast('comment');
+}
+
+// Also post a comment when status changes via fab buttons
+const _origFabAction = window.fabAction;
+window.fabAction = async function(postId, action) {
+  await _origFabAction(postId, action);
+  // Post a status-change comment automatically
+  const d = getPostData(postId);
+  const nameEl = document.getElementById('commenter-name');
+  const name = (nameEl && nameEl.value.trim()) || 'Reviewer';
+  const statusLabels = {approved:'✓ Approved this post',needs:'⚠ Flagged for changes',rejected:'✕ Rejected this post',pending:'Reset to pending'};
+  const record = {
+    author: name,
+    text: statusLabels[d.status] || d.status,
+    status: d.status !== 'pending' ? d.status : null,
+    ts: new Date().toISOString()
+  };
+  if (IS_CONFIGURED && _dbRef) {
+    const commentsRef = firebase.database().ref(CONFIG.dbPath + '-comments/' + postId);
+    await commentsRef.push(record);
+  }
+};
 </script>
 </body>
 </html>
