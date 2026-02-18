@@ -472,7 +472,8 @@ function syncPreview() {
   if (elCap)  elCap.innerHTML  = cap.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>');
   if (elLoc)  elLoc.textContent = loc ? '📍 '+loc : '';
   if (elTags) elTags.innerHTML  = tags.split(',').map(t=>t.trim()).filter(Boolean).map(t=>`<span class="ig-tag">@${t.replace(/^@/,'')}</span>`).join(' ');
-  if (elHash) elHash.innerHTML  = hash.split(/[\s,]+/).filter(Boolean).map(h=>h.startsWith('#')?h:'#'+h).join(' ');
+  // field-hashtags repurposed as @user tags; hashtags live inside caption text
+  if (elHash) elHash.innerHTML = hash.split(/[\s,]+/).filter(Boolean).map(t => `<span class="ig-tag">${t.startsWith('@') ? t : '@'+t}</span>`).join(' ');
   // Carousel / reel badge
   const pm = $e('preview-media');
   if (pm) {

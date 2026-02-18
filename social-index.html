@@ -102,12 +102,18 @@ body { padding-top: 92px; }
 <script>
 let _currentFilter = 'all';
 
+// _liveCaptions holds the latest saved caption per post id, fetched from Firebase
+// Falls back to static data caption if nothing saved yet
+const _liveCaptions = {};
+
 function buildRows() {
   const list = document.getElementById('post-list');
   list.innerHTML = '';
   SOCIAL_POSTS.forEach(p => {
     const d          = _localCache[p.id] || { status:'pending' };
-    const capPreview = (p.caption||'').slice(0,90) + ((p.caption||'').length>90?'…':'');
+    // Use Firebase-saved caption if available, otherwise fall back to static data
+    const rawCap     = _liveCaptions[p.id] || p.caption || '';
+    const capPreview = rawCap.slice(0, 90) + (rawCap.length > 90 ? '…' : '');
     const row        = document.createElement('a');
     row.className    = 'post-row';
     row.id           = 'row-'+p.id;
@@ -122,7 +128,7 @@ function buildRows() {
         <span class="date">${p.postDate}</span>
       </div>
       <div class="col-caption">
-        <span class="cap-text">${capPreview}</span>
+        <span class="cap-text" id="cap-preview-${p.id}">${capPreview}</span>
         <span class="cap-meta">Instagram + Facebook · ${p.postTime}</span>
       </div>
       <div class="col-status">
@@ -131,6 +137,31 @@ function buildRows() {
       </div>
       <div class="col-arrow">›</div>`;
     list.appendChild(row);
+  });
+}
+
+// Update just the caption preview text for one post — no full rebuild needed
+function updateCapPreview(postId, caption) {
+  const el = document.getElementById('cap-preview-' + postId);
+  if (!el) return;
+  const trimmed = (caption || '').slice(0, 90) + ((caption||'').length > 90 ? '…' : '');
+  el.textContent = trimmed;
+}
+
+// Subscribe to Firebase -content/{postId} for each post so caption previews
+// update live whenever anyone saves a new version on a post page
+function watchLiveCaptions() {
+  if (!IS_CONFIGURED || typeof firebase === 'undefined' || !firebase.apps.length) return;
+  SOCIAL_POSTS.forEach(p => {
+    firebase.database()
+      .ref(CONFIG.dbPath + '-content/' + p.id)
+      .on('value', snap => {
+        const data = snap.val();
+        if (data && data.caption) {
+          _liveCaptions[p.id] = data.caption;
+          updateCapPreview(p.id, data.caption);
+        }
+      });
   });
 }
 
@@ -143,37 +174,36 @@ function setFilter(f, btn) {
   });
 }
 
-// Override renderDashboard to also rebuild rows
-const _origRD = renderDashboard;
+// Override renderDashboard to rebuild rows (preserving live captions)
 window.renderDashboard = function() {
   buildRows();
   document.querySelectorAll('.post-row').forEach(row => {
     row.style.display = (_currentFilter==='all' || row.dataset.status===_currentFilter) ? '' : 'none';
   });
+  // Re-apply any live captions that arrived before this rebuild
+  Object.entries(_liveCaptions).forEach(([id, cap]) => updateCapPreview(Number(id), cap));
   updateCounts();
   updateNavPills();
 };
-
-// Live indicator
-if (typeof firebase !== 'undefined') {
-  firebase.database && firebase.initializeApp && null; // already handled by initFirebase
-}
 
 emailjs.init(CONFIG.emailjsPublicKey);
 initFirebase();
 buildRows();
 
-// Wire live indicator after Firebase init
+// After Firebase is ready: watch live captions + connection status
 setTimeout(() => {
   if (typeof firebase !== 'undefined' && firebase.apps.length) {
+    // Connection indicator
     firebase.database().ref('.info/connected').on('value', snap => {
       const el = document.getElementById('live-indicator');
       if (!el) return;
       if (snap.val()) { el.textContent='Live'; el.className='live-dot connected'; }
       else { el.textContent='Offline'; el.className='live-dot offline'; }
     });
+    // Live caption sync
+    watchLiveCaptions();
   }
-}, 500);
+}, 400);
 </script>
 </body>
 </html>
