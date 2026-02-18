@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Post 03 · March 20 — MDM Social Review</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 120px); }
+
+/* ── PAGE LAYOUT ───────────────────────────────────────────── */
+.page-header {
+  background: var(--dark);
+  padding: 36px 0 30px;
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.page-header::before {
+  content:''; position:absolute; inset:0;
+  background-image: linear-gradient(var(--border2) 1px,transparent 1px),linear-gradient(90deg,var(--border2) 1px,transparent 1px);
+  background-size: 48px 48px; opacity:.3; pointer-events:none;
+}
+.phi { position:relative; z-index:1; max-width:1080px; margin:0 auto; padding:0 40px; }
+.post-meta-row { display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+.post-num-badge { font-size:11px; font-weight:700; letter-spacing:.5em; color:var(--gold); text-transform:uppercase; border:1px solid var(--border); padding:5px 12px; background:var(--darker); }
+.post-date-badge { font-size:11px; font-weight:400; letter-spacing:.3em; color:var(--muted); text-transform:uppercase; }
+.plat-badge-lg { font-size:11px; font-weight:700; letter-spacing:.25em; text-transform:uppercase; padding:5px 12px; border:1px solid; border-radius:2px; }
+.plat-badge-lg.instagram { color:#C87CC0; border-color:#5A2858; background:#1A0E1A; }
+.plat-badge-lg.facebook  { color:#6090D8; border-color:#1A3060; background:#0A0E1A; }
+.plat-badge-lg.both      { color:var(--gold); border-color:var(--border); background:var(--panel); }
+.post-date-display { font-size:26px; font-weight:300; color:var(--text); margin-bottom:6px; letter-spacing:.02em; }
+.post-time-display { font-size:14px; font-weight:400; color:var(--muted); letter-spacing:.15em; }
+.seo-note { font-size:12px; font-weight:300; color:var(--dim); letter-spacing:.03em; margin-top:8px; font-style:italic; }
+
+/* ── SPLIT LAYOUT ──────────────────────────────────────────── */
+.split-layout {
+  max-width: 1080px; margin: 0 auto; padding: 40px 40px 0;
+  display: grid; grid-template-columns: 340px 1fr; gap: 48px; align-items: start;
+}
+
+/* ── PHONE PREVIEW ─────────────────────────────────────────── */
+.preview-col { position: sticky; top: 76px; }
+.preview-label { font-size: 10px; font-weight: 700; letter-spacing: .5em; color: var(--muted); text-transform: uppercase; margin-bottom: 14px; }
+.phone-frame {
+  background: #0A0A0C;
+  border: 2px solid #2A2830;
+  border-radius: 32px;
+  padding: 16px 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.04);
+  position: relative;
+}
+.phone-notch {
+  width: 80px; height: 22px; background: #0A0A0C;
+  border: 2px solid #2A2830; border-radius: 12px;
+  margin: 0 auto 10px; position: relative; z-index: 2;
+}
+.phone-screen {
+  background: var(--darker); border-radius: 20px; overflow: hidden;
+  min-height: 520px;
+}
+
+/* IG Post Preview inside phone */
+.ig-post { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.ig-header { display:flex; align-items:center; gap:10px; padding:10px 12px; }
+.ig-avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#C87CC0); flex-shrink:0; }
+.ig-username { font-size:13px; font-weight:600; color:var(--text); }
+.ig-dot { font-size:18px; color:var(--muted); margin-left:auto; padding:0 4px; cursor:default; }
+.ig-media {
+  width:100%; aspect-ratio:1/1; background:var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:48px; overflow:hidden; position:relative;
+}
+.ig-media img, .ig-media video { width:100%; height:100%; object-fit:cover; }
+.ig-media-placeholder { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.ig-media-placeholder .ig-media-emoji { font-size:40px; }
+.ig-media-placeholder .ig-media-hint { font-size:11px; color:var(--muted); letter-spacing:.15em; text-transform:uppercase; text-align:center; padding:0 16px; }
+.carousel-badge {
+  position:absolute; top:10px; right:10px;
+  background:rgba(0,0,0,.6); color:#fff; font-size:11px;
+  font-weight:600; padding:3px 8px; border-radius:12px;
+}
+.reel-badge {
+  position:absolute; top:10px; right:10px;
+  background:rgba(0,0,0,.6); color:#fff; font-size:11px;
+  font-weight:600; padding:3px 8px; border-radius:12px;
+  display:flex; align-items:center; gap:4px;
+}
+.ig-actions { display:flex; align-items:center; gap:14px; padding:10px 12px 4px; }
+.ig-action-icon { font-size:22px; cursor:default; color:var(--text); }
+.ig-save-icon { margin-left:auto; font-size:20px; cursor:default; color:var(--text); }
+.ig-caption-block { padding:0 12px 12px; }
+.ig-caption-user { font-size:13px; font-weight:700; color:var(--text); }
+.ig-caption-text { font-size:13px; font-weight:400; color:var(--text2); line-height:1.5; margin-top:2px; word-break:break-word; white-space:pre-line; }
+.ig-caption-more { font-size:13px; color:var(--muted); }
+.ig-location { font-size:12px; color:var(--muted); padding:0 12px 6px; display:flex; align-items:center; gap:4px; }
+.ig-hashtags { padding:0 12px 8px; font-size:12px; color:#6090D8; line-height:1.6; word-break:break-word; }
+.ig-tags-block { padding:0 12px 8px; display:flex; flex-wrap:wrap; gap:4px; }
+.ig-tag { font-size:12px; color:#6090D8; }
+.ig-timestamp { font-size:11px; color:var(--dim); padding:0 12px 10px; letter-spacing:.05em; }
+.platform-tab-bar { display:flex; border-top:1px solid var(--border); }
+.ptab { flex:1; text-align:center; padding:8px 0; font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); cursor:default; }
+.ptab.active { color:var(--gold); border-top:2px solid var(--gold); margin-top:-1px; }
+
+/* ── EDIT PANEL ────────────────────────────────────────────── */
+.edit-col { }
+
+/* Editor toolbar */
+.editor-bar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding-bottom:16px; border-bottom:1px solid var(--border); margin-bottom:24px;
+  flex-wrap:wrap; gap:10px;
+}
+.editor-bar-left { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.editor-label { font-size:11px; font-weight:700; letter-spacing:.5em; color:var(--gold); text-transform:uppercase; }
+.editor-mode-badge { font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); padding:4px 10px; border:1px solid var(--border); }
+.editor-mode-badge.editing { color:var(--needs-txt); border-color:var(--needs-bd); background:var(--needs-bg); }
+.editor-btn { font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:.25em; text-transform:uppercase; padding:9px 18px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all .18s; white-space:nowrap; }
+.editor-btn:hover { border-color:var(--gold); color:var(--gold); }
+.editor-btn.primary { background:var(--gold); color:var(--darker); border-color:var(--gold); }
+.editor-btn.primary:hover { opacity:.85; }
+.editor-btn.danger { border-color:var(--rejected-bd); color:var(--rejected-txt); }
+.editor-btn.danger:hover { background:var(--rejected-bg); }
+
+/* Fields */
+.fields-section { margin-bottom:28px; }
+.fields-section-title { font-size:10px; font-weight:700; letter-spacing:.5em; color:var(--dim); text-transform:uppercase; margin-bottom:12px; border-bottom:1px solid var(--border2); padding-bottom:8px; }
+.field-row { margin-bottom:16px; }
+.field-label { font-size:11px; font-weight:600; letter-spacing:.35em; color:var(--muted); text-transform:uppercase; display:block; margin-bottom:6px; }
+.field-hint { font-size:11px; font-weight:300; color:var(--dim); margin-top:4px; font-style:italic; }
+.social-field {
+  width:100%; font-family:'Montserrat',sans-serif; font-size:14px; font-weight:300;
+  background:var(--darker); border:1px solid var(--border); color:var(--text);
+  padding:10px 14px; outline:none; transition:border-color .2s; box-sizing:border-box;
+}
+.social-field:not([disabled]):focus { border-color:var(--gold); }
+.social-field[disabled] { opacity:.6; cursor:default; }
+.social-field.textarea { resize:vertical; min-height:120px; line-height:1.7; }
+.social-field.caption-field { min-height:160px; }
+.char-count { font-size:11px; color:var(--dim); text-align:right; margin-top:4px; transition:color .2s; }
+.char-count.warn { color:var(--needs-txt); }
+.char-count.over { color:var(--rejected-txt); }
+
+/* Media upload zone */
+.media-slots { display:flex; flex-direction:column; gap:12px; }
+.media-drop-zone {
+  border:2px dashed var(--border); padding:24px; text-align:center;
+  transition:all .2s; background:var(--darker); position:relative; min-height:100px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+}
+.media-drop-zone.active-drop { border-color:var(--gold); cursor:pointer; }
+.media-drop-zone.drag-over { background:rgba(196,169,106,.05); border-color:var(--gold); }
+.media-drop-zone .drop-icon { font-size:28px; color:var(--dim); }
+.media-drop-zone .drop-label { font-size:11px; font-weight:600; letter-spacing:.35em; color:var(--muted); text-transform:uppercase; }
+.media-drop-zone .drop-hint { font-size:11px; color:var(--dim); }
+.media-drop-zone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+.media-add-btn {
+  font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:.35em;
+  text-transform:uppercase; padding:8px 16px; border:1px solid var(--border);
+  background:transparent; color:var(--muted); cursor:pointer; transition:all .18s; width:100%;
+}
+.media-add-btn:hover { border-color:var(--gold); color:var(--gold); }
+.media-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
+.media-item { position:relative; aspect-ratio:1/1; background:var(--border); overflow:hidden; }
+.media-item img, .media-item video { width:100%; height:100%; object-fit:cover; }
+.media-remove { position:absolute; top:4px; right:4px; background:rgba(0,0,0,.7); border:none; color:#fff; font-size:14px; padding:2px 6px; cursor:pointer; display:none; border-radius:2px; }
+.active-drop .media-remove { display:block; }
+
+/* Scheduling */
+.datetime-row { display:flex; gap:10px; }
+.datetime-row .field-row { flex:1; }
+
+/* Platform toggles */
+.platform-checks { display:flex; gap:12px; flex-wrap:wrap; }
+.plat-check { display:flex; align-items:center; gap:8px; padding:10px 16px; border:1px solid var(--border); cursor:pointer; transition:all .18s; flex:1; }
+.plat-check:hover { border-color:var(--gold); }
+.plat-check input { display:none; }
+.plat-check .plat-check-label { font-size:12px; font-weight:600; letter-spacing:.25em; text-transform:uppercase; color:var(--muted); }
+.plat-check .plat-check-icon { font-size:18px; }
+.plat-check.checked { background:rgba(196,169,106,.06); border-color:var(--gold); }
+.plat-check.checked .plat-check-label { color:var(--gold); }
+
+/* ── DISCUSSION ─────────────────────────────────────────────── */
+.discussion-outer { max-width:1080px; margin:0 auto; padding:48px 40px 0; }
+.discussion-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:16px; }
+.discussion-title { font-size:11px; font-weight:700; letter-spacing:.45em; color:var(--gold); text-transform:uppercase; }
+.comment-form { background:var(--panel); border:1px solid var(--border); padding:20px; margin-bottom:28px; }
+.comment-form-row { display:flex; gap:10px; margin-bottom:12px; }
+.comment-name-input { flex:1; font-family:'Montserrat',sans-serif; font-size:14px; font-weight:400; background:var(--darker); border:1px solid var(--border); color:var(--text); padding:11px 14px; outline:none; transition:border-color .2s; }
+.comment-name-input:focus { border-color:var(--gold); }
+.comment-textarea { width:100%; box-sizing:border-box; font-family:'Montserrat',sans-serif; font-size:14px; font-weight:300; background:var(--darker); border:1px solid var(--border); color:var(--text); padding:12px 14px; resize:vertical; min-height:80px; outline:none; transition:border-color .2s; }
+.comment-textarea:focus { border-color:var(--gold); }
+.comment-submit { font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; padding:10px 22px; background:var(--gold); color:var(--darker); border:none; cursor:pointer; transition:opacity .18s; margin-top:8px; }
+.comment-submit:hover { opacity:.85; }
+.comments-list { display:flex; flex-direction:column; gap:14px; margin-bottom:20px; }
+.comment-item { background:var(--panel); border:1px solid var(--border); padding:16px 18px; }
+.comment-item.highlight { border-left:2px solid var(--gold); }
+.comment-meta { display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+.comment-author { font-size:13px; font-weight:600; color:var(--text); }
+.comment-time { font-size:12px; color:var(--muted); }
+.comment-status-tag { font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; padding:2px 8px; border-radius:2px; }
+.comment-status-tag.approved { background:var(--approved-bg); color:var(--approved-txt); border:1px solid var(--approved-bd); }
+.comment-status-tag.needs { background:var(--needs-bg); color:var(--needs-txt); border:1px solid var(--needs-bd); }
+.comment-status-tag.rejected { background:var(--rejected-bg); color:var(--rejected-txt); border:1px solid var(--rejected-bd); }
+.comment-body { font-size:14px; font-weight:300; color:var(--text2); line-height:1.7; }
+.no-comments { font-size:13px; color:var(--dim); font-style:italic; padding:12px 0; }
+
+/* ── VERSION HISTORY ────────────────────────────────────────── */
+.vh-outer { max-width:1080px; margin:0 auto; padding:32px 40px 0; }
+.vh-bar { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); cursor:pointer; }
+.vh-bar:hover .vh-title { color:var(--text); }
+.vh-title { font-size:11px; font-weight:700; letter-spacing:.45em; color:var(--muted); text-transform:uppercase; transition:color .18s; }
+.vh-toggle { font-size:14px; color:var(--dim); transition:transform .2s; }
+.vh-toggle.open { transform:rotate(180deg); }
+.vh-list { display:none; flex-direction:column; }
+.vh-list.open { display:flex; }
+.vh-entry { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--border2); }
+.vh-entry-meta { flex:1; min-width:0; }
+.vh-entry-time { font-size:13px; font-weight:500; color:var(--text2); display:block; }
+.vh-entry-author { font-size:12px; color:var(--muted); }
+.vh-entry-preview { font-size:12px; color:var(--dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px; }
+.vh-restore-btn { font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; padding:6px 14px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all .18s; white-space:nowrap; }
+.vh-restore-btn:hover { border-color:var(--gold); color:var(--gold); }
+.vh-current-badge { font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; padding:6px 14px; color:var(--gold); border:1px solid var(--gold); }
+.vh-empty { font-size:13px; color:var(--dim); font-style:italic; padding:16px 0; }
+
+/* ── RESTORE MODAL ──────────────────────────────────────────── */
+.restore-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:10000; align-items:center; justify-content:center; padding:20px; }
+.restore-modal.open { display:flex; }
+.restore-box { background:var(--dark); border:1px solid var(--border); max-width:560px; width:100%; max-height:80vh; display:flex; flex-direction:column; }
+.restore-header { display:flex; align-items:center; justify-content:space-between; padding:18px 22px; border-bottom:1px solid var(--border); }
+.restore-title { font-size:12px; font-weight:700; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); }
+.restore-close { font-size:18px; background:none; border:none; color:var(--muted); cursor:pointer; padding:4px 8px; }
+.restore-close:hover { color:var(--text); }
+.restore-preview { padding:20px 22px; overflow-y:auto; flex:1; }
+.restore-field-row { margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border2); }
+.restore-field-row:last-child { border-bottom:none; }
+.rfr-label { font-size:10px; font-weight:700; letter-spacing:.4em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:5px; }
+.rfr-val { font-size:13px; font-weight:300; color:var(--text2); line-height:1.6; white-space:pre-wrap; word-break:break-word; }
+.restore-actions { display:flex; gap:10px; padding:16px 22px; border-top:1px solid var(--border); justify-content:flex-end; }
+
+/* ── POST NAV ───────────────────────────────────────────────── */
+.post-nav-outer { max-width:1080px; margin:0 auto; padding:40px 40px 60px; display:flex; justify-content:space-between; align-items:flex-start; gap:14px; }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media(max-width:860px) {
+  .split-layout { grid-template-columns:1fr; gap:32px; }
+  .preview-col { position:static; }
+  .phi,.split-layout,.discussion-outer,.vh-outer,.post-nav-outer { padding-left:16px; padding-right:16px; }
+  .post-nav-outer { flex-direction:column; padding-bottom:120px; }
+}
+@media(max-width:480px) {
+  .datetime-row { flex-direction:column; }
+  .editor-bar { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="social-index.html" class="nav-brand">
+    <div class="nav-monogram">MDM</div>
+    <span class="nav-title">Social Review</span>
+  </a>
+  <div class="nav-right">
+    <span class="live-dot" id="live-indicator">…</span>
+    <a href="social-index.html" class="nav-back">← All Posts</a>
+    <div class="nav-progress">
+      <span class="nav-pill approved" id="pill-approved">0 ✓</span>
+      <span class="nav-pill needs"    id="pill-needs">0 ⚠</span>
+      <span class="nav-pill rejected" id="pill-rejected">0 ✕</span>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="phi">
+    <div class="post-meta-row">
+      <span class="post-num-badge">Post 03 of 20</span>
+      <span class="post-date-badge">Friday · March 20</span>
+      <span class="plat-badge-lg instagram">📸 Instagram</span>
+    </div>
+    <div class="post-date-display">March 20 at 9:00 AM</div>
+    <div class="post-time-display" id="time-display">Scheduled</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:14px;">
+      <span class="status-badge pending" id="status-badge"><span class="badge-text">Pending Review</span></span>
+    </div>
+  </div>
+</div>
+<div class="gold-rule"></div>
+
+<!-- SPLIT LAYOUT -->
+<div class="split-layout">
+
+  <!-- LEFT: PHONE PREVIEW -->
+  <div class="preview-col">
+    <p class="preview-label">Live Preview</p>
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="ig-post">
+          <!-- Header -->
+          <div class="ig-header">
+            <div class="ig-avatar"></div>
+            <div>
+              <div class="ig-username">mdmdesignstudio</div>
+              <div style="font-size:11px;color:var(--muted);">Sponsored</div>
+            </div>
+            <div class="ig-dot">···</div>
+          </div>
+          <!-- Media -->
+          <div class="ig-media" id="preview-media">
+            <div class="ig-media-placeholder">
+              <div class="ig-media-emoji">🔨</div>
+              <div class="ig-media-hint">Upload media to preview</div>
+            </div>
+            
+            
+          </div>
+          <!-- Actions -->
+          <div class="ig-actions">
+            <span class="ig-action-icon">♡</span>
+            <span class="ig-action-icon">💬</span>
+            <span class="ig-action-icon">↗</span>
+            <span class="ig-save-icon">🔖</span>
+          </div>
+          <!-- Caption -->
+          <div class="ig-caption-block">
+            <span class="ig-caption-user">mdmdesignstudio </span><span class="ig-caption-text" id="preview-caption">10 questions you should ask any custom furniture maker before signing a contract. We've heard every answer — good and bad. Tap the link in bio for the full guide. 🔨</span>
+          </div>
+          <!-- Location -->
+          <div class="ig-location" id="preview-location"></div>
+          <!-- Hashtags -->
+          <div class="ig-hashtags" id="preview-hashtags">#customfurniture #furnituremaker #woodworking #howtochoose #MDMDesignStudio #craftsman #Birmingham #handcrafted #buylocal #qualityfurniture</div>
+          <!-- Tags -->
+          <div class="ig-tags-block" id="preview-tags"><span class="ig-tag">@mdmdesignstudio</span></div>
+          <!-- Timestamp -->
+          <div class="ig-timestamp">March 20 9:00 AM</div>
+          <!-- Platform tabs -->
+          <div class="platform-tab-bar">
+            <div class="ptab active">Instagram</div>
+            <div class="ptab">Facebook</div>
+          </div>
+        </div>
+      </div><!-- /phone-screen -->
+    </div><!-- /phone-frame -->
+    <p class="seo-note" style="margin-top:12px;">Preview updates live as you edit fields →</p>
+  </div><!-- /preview-col -->
+
+  <!-- RIGHT: EDIT PANEL -->
+  <div class="edit-col">
+
+    <!-- Editor toolbar -->
+    <div class="editor-bar">
+      <div class="editor-bar-left">
+        <span class="editor-label">Post Details</span>
+        <span class="editor-mode-badge" id="edit-mode-badge">Read Only</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="editor-btn" id="edit-toggle-btn" onclick="toggleEditor()">✎ Edit</button>
+        <button class="editor-btn primary" id="edit-save-btn" style="display:none;" onclick="saveEdit(3)">↑ Save Version</button>
+        <button class="editor-btn danger"  id="edit-cancel-btn" style="display:none;" onclick="cancelEdit()">✕ Cancel</button>
+      </div>
+    </div>
+
+    <!-- MEDIA -->
+    <div class="fields-section">
+      <div class="fields-section-title">Media</div>
+
+      <div class="field-row">
+        <label class="field-label">Post Type</label>
+        <select class="social-field" id="field-mediaType" disabled onchange="syncPreview();updateMediaUI()">
+          <option value="photo" selected>Single Photo</option>
+<option value="carousel">Carousel (multiple photos)</option>
+<option value="reel">Reel / Video</option>
+<option value="video">Video</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <label class="field-label">Platform</label>
+        <select class="social-field" id="field-platform" disabled onchange="syncPlatformTabs()">
+          <option value="instagram" selected>Instagram Only</option>
+<option value="facebook">Facebook Only</option>
+<option value="both">Both Platforms</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <label class="field-label">Photo / Video Upload</label>
+        <div id="media-slots" class="media-slots">
+          <div class="media-drop-zone" id="media-slot-1"
+               ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)"
+               ondrop="handleMediaDrop(event,'media-slot-1')">
+            <div class="drop-icon">📎</div>
+            <div class="drop-label">Drop photo or video here</div>
+            <div class="drop-hint">JPG, PNG, MP4 · max 100MB</div>
+            <input type="file" accept="image/*,video/*" multiple onchange="handleMediaDrop(event,'media-slot-1')" disabled>
+          </div>
+        </div>
+        <p class="field-hint">Add up to 10 photos for carousel posts. Enable editing to upload.</p>
+      </div>
+
+      <div class="field-row">
+        <label class="field-label">Alt Text / Accessibility Caption</label>
+        <textarea class="social-field" id="field-altText" disabled rows="2" placeholder="Describe the visual for accessibility…">Craftsman at workbench examining wood joinery in warm shop light.</textarea>
+      </div>
+    </div>
+
+    <!-- CAPTION -->
+    <div class="fields-section">
+      <div class="fields-section-title">Caption</div>
+      <div class="field-row">
+        <label class="field-label">Caption</label>
+        <textarea class="social-field caption-field" id="field-caption" disabled
+          oninput="syncPreview();updateCharCount(this,'caption-count',2200)"
+          placeholder="Write your caption here…">10 questions you should ask any custom furniture maker before signing a contract. We've heard every answer — good and bad. Tap the link in bio for the full guide. 🔨</textarea>
+        <div class="char-count" id="caption-count">164 / 2,200</div>
+      </div>
+    </div>
+
+    <!-- DETAILS -->
+    <div class="fields-section">
+      <div class="fields-section-title">Post Details</div>
+
+      <div class="field-row">
+        <label class="field-label">Location Tag</label>
+        <input class="social-field" type="text" id="field-location" disabled
+          oninput="syncPreview()" placeholder="e.g. Birmingham, Alabama"
+          value="">
+      </div>
+
+      <div class="field-row">
+        <label class="field-label">User / Account Tags <span style="color:var(--dim);font-weight:300;">(comma separated)</span></label>
+        <input class="social-field" type="text" id="field-tags" disabled
+          oninput="syncPreview()" placeholder="@mdmdesignstudio, @thecreatorie"
+          value="@mdmdesignstudio">
+        <p class="field-hint">Include @ symbol or it will be added automatically.</p>
+      </div>
+
+      <div class="field-row">
+        <label class="field-label">Hashtags</label>
+        <textarea class="social-field" id="field-hashtags" disabled rows="3"
+          oninput="syncPreview();updateCharCount(this,'hash-count',30,'hashtags')"
+          placeholder="#customfurniture #woodworking #Birmingham…">#customfurniture #furnituremaker #woodworking #howtochoose #MDMDesignStudio #craftsman #Birmingham #handcrafted #buylocal #qualityfurniture</textarea>
+        <div class="char-count" id="hash-count" style="text-align:right;">10 / 30 tags</div>
+        <p class="field-hint">Separate with spaces or commas. # will be added if missing.</p>
+      </div>
+    </div>
+
+    <!-- SCHEDULING -->
+    <div class="fields-section">
+      <div class="fields-section-title">Scheduling</div>
+      <div class="datetime-row">
+        <div class="field-row">
+          <label class="field-label">Post Date</label>
+          <input class="social-field" type="text" id="field-postDate" disabled
+            oninput="syncScheduleDisplay()" placeholder="e.g. March 2, 2026"
+            value="March 20">
+        </div>
+        <div class="field-row">
+          <label class="field-label">Post Time</label>
+          <input class="social-field" type="time" id="field-postTime" disabled
+            oninput="syncScheduleDisplay()"
+            value="09:00">
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="field-label">Time Zone</label>
+        <select class="social-field" id="field-timezone" disabled>
+          <option value="CT" selected>Central Time (CT)</option>
+          <option value="ET">Eastern Time (ET)</option>
+          <option value="MT">Mountain Time (MT)</option>
+          <option value="PT">Pacific Time (PT)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- REVIEWER NAME (for comments/versions) -->
+    <div class="field-row" style="padding-top:8px;border-top:1px solid var(--border2);">
+      <label class="field-label">Your Name <span style="color:var(--dim);font-weight:300;">(for notes &amp; version history)</span></label>
+      <input class="comment-name-input" type="text" id="commenter-name" placeholder="e.g. Sarah, MDM Team…" style="width:100%;">
+    </div>
+
+  </div><!-- /edit-col -->
+</div><!-- /split-layout -->
+
+<!-- DISCUSSION -->
+<div class="discussion-outer">
+  <div class="discussion-header">
+    <div>
+      <div class="discussion-title">Discussion</div>
+      <div style="font-size:12px;color:var(--muted);font-weight:300;margin-top:4px;">Notes visible to everyone with access</div>
+    </div>
+    <span class="live-dot" id="disc-live" style="font-size:11px;">…</span>
+  </div>
+
+  <div class="comment-form">
+    <div class="comment-form-row">
+      <input class="comment-name-input" type="text" id="comment-name-disc" placeholder="Your name…" style="max-width:220px;">
+    </div>
+    <textarea class="comment-textarea" id="comment-text" placeholder="Add a note, question, or feedback on this post…"></textarea>
+    <button class="comment-submit" onclick="submitCommentFromDisc(3)">Post Note</button>
+  </div>
+  <div class="comments-list" id="comments-list">
+    <p class="no-comments" id="no-comments-msg">No notes yet. Be the first to leave feedback.</p>
+  </div>
+</div>
+
+<!-- VERSION HISTORY -->
+<div class="vh-outer">
+  <div class="vh-bar" onclick="toggleVH()">
+    <span class="vh-title">Version History <span id="vh-count" style="color:var(--dim);font-weight:300;text-transform:none;letter-spacing:.05em;"></span></span>
+    <span class="vh-toggle" id="vh-toggle">▾</span>
+  </div>
+  <div class="vh-list" id="vh-list">
+    <p class="vh-empty" id="vh-empty">No saved versions yet.</p>
+  </div>
+</div>
+
+<!-- RESTORE MODAL -->
+<div class="restore-modal" id="restore-modal">
+  <div class="restore-box">
+    <div class="restore-header">
+      <span class="restore-title">Restore this version?</span>
+      <button class="restore-close" onclick="closeRestoreModal()">✕</button>
+    </div>
+    <div class="restore-preview" id="restore-preview"></div>
+    <div class="restore-actions">
+      <button class="editor-btn" onclick="closeRestoreModal()">Cancel</button>
+      <button class="editor-btn primary" onclick="confirmRestore()">Restore this Version</button>
+    </div>
+  </div>
+</div>
+
+<!-- POST NAV -->
+<div class="post-nav-outer">
+  <a class="post-nav-btn left" href="social-post-02.html"><span class="nav-arrow">‹</span><div><span class="nav-meta">Previous</span><span class="nav-name">March 11 · Both</span></div></a>
+  <div class="post-nav-center" style="padding-top:16px;font-size:11px;font-weight:600;letter-spacing:.4em;color:var(--muted);text-transform:uppercase;">Post 3 of 20</div>
+  <a class="post-nav-btn right" href="social-post-04.html"><div><span class="nav-meta">Next</span><span class="nav-name">March 31 · Facebook</span></div><span class="nav-arrow">›</span></a>
+</div>
+
+<!-- FAB -->
+<div class="fab">
+  <div class="fab-label" id="fab-label-txt">Your Decision</div>
+  <div class="fab-comment-box" id="fab-comment-box">
+    <textarea class="fab-textarea" id="fab-textarea" placeholder="Add a note (optional)…"></textarea>
+    <button class="fab-save-comment" onclick="fabSaveNote(3)">Save Note</button>
+  </div>
+  <div class="fab-buttons">
+    <button class="fab-btn approve" data-action="approved" onclick="fabAction(3,'approved')">✓ Approve</button>
+    <button class="fab-btn needs"   data-action="needs"    onclick="fabAction(3,'needs')">⚠ Changes</button>
+    <button class="fab-btn reject"  data-action="rejected"  onclick="fabAction(3,'rejected')">✕ Reject</button>
+    <button class="fab-comment-toggle" onclick="toggleCommentBox()">✎ Note</button>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="social-app.js"></script>
+<script src="social-posts-data.js"></script>
+<script>
+const POST_ID = 3;
+
+// Sync commenter name across both inputs
+document.getElementById('commenter-name').addEventListener('input', function() {
+  const disc = document.getElementById('comment-name-disc');
+  if (disc) disc.value = this.value;
+});
+document.getElementById('comment-name-disc').addEventListener('input', function() {
+  const main = document.getElementById('commenter-name');
+  if (main) main.value = this.value;
+});
+
+// Discussion submitComment wrapper
+function submitCommentFromDisc(postId) {
+  const nameEl = document.getElementById('comment-name-disc');
+  const mainName = document.getElementById('commenter-name');
+  if (nameEl && mainName) mainName.value = nameEl.value;
+  // Reassign comment-name for submitComment which reads commenter-name
+  submitComment(postId);
+}
+
+// Character counts
+function updateCharCount(el, countId, max, mode) {
+  const countEl = document.getElementById(countId);
+  if (!countEl) return;
+  if (mode === 'hashtags') {
+    const tags = el.value.split(/[\s,]+/).filter(Boolean);
+    countEl.textContent = tags.length + ' / ' + max + ' tags';
+    countEl.className = 'char-count' + (tags.length > max ? ' over' : tags.length > max * .9 ? ' warn' : '');
+  } else {
+    const len = el.value.length;
+    countEl.textContent = len.toLocaleString() + ' / ' + max.toLocaleString();
+    countEl.className = 'char-count' + (len > max ? ' over' : len > max * .9 ? ' warn' : '');
+  }
+}
+
+// Update media slot UI based on type
+function updateMediaUI() {
+  const type   = document.getElementById('field-mediaType')?.value;
+  const badge  = document.getElementById('preview-media')?.querySelector('.carousel-badge,.reel-badge');
+  if (badge) badge.remove();
+  const media  = document.getElementById('preview-media');
+  if (type === 'carousel') {
+    const b = document.createElement('div'); b.className='carousel-badge'; b.textContent='❑ Carousel'; media?.appendChild(b);
+  } else if (type === 'reel' || type === 'video') {
+    const b = document.createElement('div'); b.className='reel-badge'; b.textContent='▶ Reel'; media?.appendChild(b);
+  }
+}
+
+// Sync platform tabs in preview
+function syncPlatformTabs() {
+  const plat  = document.getElementById('field-platform')?.value;
+  const tabs  = document.querySelectorAll('.ptab');
+  if (!tabs.length) return;
+  tabs[0].className = 'ptab' + (plat !== 'facebook' ? ' active' : '');
+  tabs[1].className = 'ptab' + (plat !== 'instagram' ? ' active' : '');
+}
+
+// Show scheduled time nicely
+function syncScheduleDisplay() {
+  const date  = document.getElementById('field-postDate')?.value || '';
+  const time  = document.getElementById('field-postTime')?.value || '';
+  const tz    = document.getElementById('field-timezone')?.value || 'CT';
+  const disp  = document.getElementById('time-display');
+  if (disp) {
+    if (date || time) {
+      let timeStr = '';
+      if (time) {
+        const [h, m] = time.split(':');
+        const hr = parseInt(h); const ampm = hr >= 12 ? 'PM' : 'AM'; const hr12 = hr % 12 || 12;
+        timeStr = ` at ${hr12}:${m} ${ampm} ${tz}`;
+      }
+      disp.textContent = 'Scheduled: ' + date + timeStr;
+    } else {
+      disp.textContent = 'Scheduled';
+    }
+  }
+}
+
+// Firebase live indicator
+firebase.database().ref('.info/connected').on('value', snap => {
+  const liveEl = document.getElementById('live-indicator');
+  const discEl = document.getElementById('disc-live');
+  const connected = snap.val();
+  if (liveEl) { liveEl.textContent = connected ? 'Live' : 'Offline'; liveEl.className = 'live-dot ' + (connected ? 'connected' : 'offline'); }
+  if (discEl) { discEl.textContent = connected ? 'Live' : 'Offline'; discEl.className = 'live-dot ' + (connected ? 'connected' : 'offline'); }
+});
+
+emailjs.init(CONFIG.emailjsPublicKey);
+initFirebase();
+initPostPage(POST_ID);
+loadComments(POST_ID);
+loadVersionHistory(POST_ID);
+syncScheduleDisplay();
+</script>
+</body>
+</html>
