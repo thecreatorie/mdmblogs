@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>From Sketch to Sawdust — MDM Design Studio</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+body { padding-top: 56px; padding-bottom: env(safe-area-inset-bottom, 0); }
+.post-header { background: var(--dark); padding: 48px 0 40px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.post-header::before { content:''; position:absolute; inset:0; background-image: linear-gradient(var(--border2) 1px,transparent 1px),linear-gradient(90deg,var(--border2) 1px,transparent 1px); background-size:48px 48px; opacity:.3; }
+.phi { position:relative; z-index:1; max-width:740px; margin:0 auto; padding:0 40px; }
+.post-meta-row { display:flex; align-items:center; gap:14px; margin-bottom:20px; flex-wrap:wrap; }
+.post-num-badge { font-size:16px; font-weight:600; letter-spacing:.5em; color:var(--gold); text-transform:uppercase; border:1px solid var(--border); padding:5px 12px; background:var(--darker); }
+.post-date-str { font-size:16px; font-weight:400; letter-spacing:.3em; color:var(--muted); text-transform:uppercase; }
+.post-cat { font-size:16px; font-weight:500; letter-spacing:.45em; color:var(--gold); text-transform:uppercase; }
+.post-title { font-family:'Montserrat',sans-serif; font-weight:400; font-size:38px; line-height:1.15; letter-spacing:.02em; color:var(--text); margin-bottom:10px; }
+.post-subtitle { font-family:'Montserrat',sans-serif; font-style:italic; font-weight:300; font-size:20px; color:var(--gold); margin-bottom:24px; line-height:1.3; }
+.seo-box { background:var(--panel); border:1px solid var(--border); border-left:2px solid var(--gold); padding:13px 18px; margin-top:22px; }
+.seo-box .seo-lbl { font-size:16px; font-weight:600; letter-spacing:.45em; color:var(--gold); text-transform:uppercase; margin-bottom:5px; display:block; }
+.seo-box p { font-size:16px; font-weight:300; color:var(--text2); line-height:1.6; }
+.pbw { max-width:740px; margin:0 auto; padding:48px 40px 0; }
+.post-body h2 { font-family:'Montserrat',sans-serif; font-weight:500; font-size:24px; letter-spacing:.02em; color:var(--text); margin:36px 0 14px; line-height:1.25; }
+.post-body h3 { font-family:'Montserrat',sans-serif; font-weight:500; font-size:16px; letter-spacing:.12em; color:var(--gold); text-transform:uppercase; margin:24px 0 10px; }
+.post-body p { font-size:16px; font-weight:300; line-height:1.9; color:var(--text2); margin-bottom:18px; letter-spacing:.01em; }
+.post-body em { font-style:italic; color:var(--text); }
+.post-body strong { font-weight:500; color:var(--text); }
+.post-body a { color:var(--gold); text-decoration:none; border-bottom:1px solid transparent; transition:border-color .2s; }
+.post-body a:hover { border-bottom-color:var(--gold); }
+.post-body ul { padding-left:0; margin-bottom:18px; list-style:none; }
+.post-body li { font-size:16px; font-weight:300; line-height:1.8; color:var(--text2); padding:5px 0 5px 18px; position:relative; border-bottom:1px solid var(--border2); }
+.post-body li::before { content:'—'; position:absolute; left:0; color:var(--gold); }
+.post-body p.cta-text { margin-top:36px; padding:22px 26px; background:var(--panel); border:1px solid var(--border); border-left:2px solid var(--gold); font-size:16px; font-style:italic; color:var(--text2); }
+.post-nav-outer { max-width:740px; margin:0 auto; padding:36px 40px 120px; display:flex; justify-content:space-between; align-items:flex-start; gap:14px; }
+@media(max-width:600px) {
+  .phi,.pbw { padding-left:16px; padding-right:16px; }
+  .post-title { font-size:26px; }
+  .post-subtitle { font-size:16px; }
+  .post-body p,.post-body li { font-size:16px; }
+  .post-nav-outer { padding:24px 16px 140px; flex-direction:column; }
+  .post-nav-btn.right { flex-direction:row; text-align:left; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="../index.html" class="nav-brand">
+    <div class="nav-monogram">MDM</div>
+    <span class="nav-title">Blog Review</span>
+  </a>
+  <div class="nav-right">
+    <span class="live-dot" id="live-indicator">…</span>
+    <a href="../index.html" class="nav-back">← All Posts</a>
+    <div class="nav-progress">
+      <span class="nav-pill approved" id="pill-approved">0 ✓</span>
+      <span class="nav-pill needs"    id="pill-needs">0 ⚠</span>
+      <span class="nav-pill rejected" id="pill-rejected">0 ✕</span>
+    </div>
+  </div>
+</nav>
+
+<div class="post-header">
+  <div class="phi">
+    <div class="post-meta-row">
+      <span class="post-num-badge">Post 01 of 25</span>
+      <span class="post-date-str">Tuesday, March 3, 2026</span>
+      <span class="post-cat">Process</span>
+    </div>
+    <h1 class="post-title">From Sketch to Sawdust</h1>
+    <p class="post-subtitle">A Behind-the-Scenes Look at How a Custom Piece is Born</p>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:4px;">
+      <span class="status-badge pending" id="status-badge"><span class="badge-text">Pending Review</span></span>
+    </div>
+    <div class="seo-box">
+      <span class="seo-lbl">SEO Meta Description</span>
+      <p>Curious how custom furniture actually gets made? MDM Design Studio walks you through the full process — from initial consultation to final installation — so you know exactly what to expect.</p>
+    </div>
+  </div>
+</div>
+<div class="gold-rule"></div>
+
+<div class="pbw">
+  <div class="post-body">
+    <p>One of the questions we hear most at MDM Design Studio is some version of: <em>"So how does this actually work?"</em> It's a fair question. Custom furniture isn't something most people do every day, and walking into the process without a roadmap can feel intimidating. We want to change that.</p>
+<h2>Step 1: The Conversation</h2>
+<p>Every project starts with a conversation, not a contract. When you reach out to us — whether through our contact form, an email, or a phone call — we want to hear about your space, your lifestyle, and what you're hoping to accomplish. This isn't a sales pitch. It's us listening.</p>
+<h2>Step 2: Site Measurement and Assessment</h2>
+<p>Before a single design decision is made, we need accurate measurements. For built-ins, cabinetry, or pieces designed for a specific alcove or wall, we'll schedule a time to visit your space and take precise measurements ourselves. This step is non-negotiable — it's the difference between a piece that fits perfectly and one that causes headaches on installation day.</p>
+<h2>Step 3: Design Development</h2>
+<p>Once we understand your space and your vision, our team gets to work on the design. This phase involves sketches, drawings, and often 3D renderings that allow you to visualize the piece before any material is ever cut. We'll share these with you for review and feedback, and we'll refine until the design feels exactly right.</p>
+<h2>Step 4: The Quote and Agreement</h2>
+<p>Once the design is finalized, you'll receive a detailed quote that breaks down materials, labor, and timeline. We believe in transparency at this stage. You should know exactly what you're investing in and why.</p>
+<h2>Step 5: Material Sourcing</h2>
+<p>Great custom furniture starts with great material. After your deposit, we source your specific wood slabs, sheet goods, hardware, and any specialty components. We're selective at this stage — grain patterns, color consistency, and structural integrity all matter.</p>
+<h2>Step 6: The Build</h2>
+<p>This is where the magic happens. Your piece moves from drawings into reality inside our Birmingham studio. Depending on the complexity of the project, the build phase might involve CNC cutting, hand joinery, laminating, bending, carving, or a combination of all of the above.</p>
+<h2>Step 7: Finishing</h2>
+<p>Once the structure is complete, the piece moves to finishing. This is where sanding, staining, painting, lacquering, or oiling happens — and it's often the most time-consuming stage. A great finish requires multiple applications, drying time between coats, and careful inspection. We don't rush it.</p>
+<h2>Step 8: Delivery and Installation</h2>
+<p>The final step is getting your piece into your home and making sure it's perfect. Once everything is in place, we walk through the piece with you, explain care and maintenance, and make sure you're completely satisfied before we leave.</p>
+<p class="cta-text">At MDM Design Studio, we believe the process itself is part of the value. Ready to get started? <a href="https://mdmdesignstudio.com/get-a-quote/">Get a quote</a> or reach out directly.</p>
+  </div>
+</div>
+
+<div class="post-nav-outer">
+  <div></div>
+  <div class="post-nav-center" style="padding-top:16px;font-size:16px;font-weight:500;letter-spacing:.4em;color:var(--muted);text-transform:uppercase;">Post 1 of 25</div>
+  <a class="post-nav-btn right" href="post-02.html"><div><span class="nav-meta">Next</span><span class="nav-name">Why the First Measurement Matters Most</span></div><span class="nav-arrow">›</span></a>
+</div>
+
+<!-- FLOATING REVIEW BAR -->
+<div class="fab">
+  <div class="fab-label">Your Review</div>
+  <div class="fab-comment-box" id="fab-comment-box">
+    <textarea class="fab-textarea" id="fab-textarea" placeholder="Leave a note for MDM (optional)…" rows="3"></textarea>
+    <button class="fab-save-comment" onclick="saveComment(1)">Save Note</button>
+  </div>
+  <div class="fab-buttons">
+    <button class="fab-comment-toggle" onclick="toggleCommentBox()">+ Note</button>
+    <button class="fab-btn needs"   data-action="needs"    onclick="fabAction(1,'needs')">⚠ Changes</button>
+    <button class="fab-btn reject"  data-action="rejected" onclick="fabAction(1,'rejected')">✕ Reject</button>
+    <button class="fab-btn approve" data-action="approved" onclick="fabAction(1,'approved')">✓ Approve</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="../app.js"></script>
+<script>
+  const liveEl = document.getElementById('live-indicator');
+  window.addEventListener('DOMContentLoaded', () => {
+    if (typeof emailjs !== 'undefined' && CONFIG.emailjsPublicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+      emailjs.init(CONFIG.emailjsPublicKey);
+    }
+    initFirebase();
+    initPostPage(1);
+    if (IS_CONFIGURED) {
+      const connRef = firebase.database().ref('.info/connected');
+      connRef.on('value', snap => {
+        liveEl.textContent = snap.val() ? 'Live' : 'Offline';
+        liveEl.className = 'live-dot ' + (snap.val() ? 'connected' : 'offline');
+      });
+    } else {
+      liveEl.textContent = 'Local';
+      liveEl.className = 'live-dot offline';
+    }
+  });
+</script>
+</body>
+</html>

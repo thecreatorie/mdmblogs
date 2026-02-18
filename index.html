@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>MDM Design Studio — Blog Review Portal</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { padding-top: 56px; }
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--dark);
+  padding: 48px 48px 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--border2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border2) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.3;
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-eyebrow { font-size: 16px; font-weight: 600; letter-spacing: .55em; color: var(--gold); text-transform: uppercase; display: block; margin-bottom: 14px; }
+.hero-title { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 44px; letter-spacing: .04em; color: var(--text); line-height: 1.1; margin-bottom: 6px; }
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 16px; font-weight: 300; letter-spacing: .08em; color: var(--muted); margin-bottom: 32px; display: block; }
+
+/* Stats */
+.stats-row { display: flex; gap: 0; border: 1px solid var(--border); margin-bottom: 24px; overflow-x: auto; }
+.stat-block { flex: 1; min-width: 80px; padding: 18px 20px; border-right: 1px solid var(--border); }
+.stat-block:last-child { border-right: none; }
+.stat-n { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 300; line-height: 1; margin-bottom: 3px; display: block; }
+.stat-l { font-size: 16px; font-weight: 600; letter-spacing: .4em; text-transform: uppercase; display: block; }
+.stat-block.s-total   .stat-n { color: var(--text2); }   .stat-block.s-total   .stat-l { color: var(--muted); }
+.stat-block.s-approved .stat-n { color: var(--approved-txt); } .stat-block.s-approved .stat-l { color: var(--approved-bd); }
+.stat-block.s-needs   .stat-n { color: var(--needs-txt); }    .stat-block.s-needs   .stat-l { color: var(--needs-bd); }
+.stat-block.s-rejected .stat-n { color: var(--rejected-txt); } .stat-block.s-rejected .stat-l { color: var(--rejected-bd); }
+.stat-block.s-pending .stat-n { color: var(--pending-txt); }  .stat-block.s-pending .stat-l { color: var(--dim); }
+
+/* Progress */
+.progress-wrap { position: relative; }
+.progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
+.progress-meta span { font-size: 16px; font-weight: 500; letter-spacing: .4em; color: var(--muted); text-transform: uppercase; }
+.progress-track { height: 2px; background: var(--border); position: relative; }
+.progress-fill { position: absolute; left:0; top:0; bottom:0; background: linear-gradient(90deg, var(--approved-txt), var(--gold)); transition: width .6s cubic-bezier(.4,0,.2,1); width: 0%; }
+
+/* Filters */
+.filters { background: var(--darker); padding: 14px 48px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); position: sticky; top: 56px; z-index: 100; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.filter-label { font-size: 16px; font-weight: 500; letter-spacing: .4em; color: var(--dim); text-transform: uppercase; margin-right: 4px; white-space: nowrap; }
+.filter-btn { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; padding: 7px 14px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; transition: all .18s; white-space: nowrap; }
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--gold); color: var(--darker); border-color: var(--gold); }
+.filter-btn.f-approved.active { background: var(--approved-txt); color: var(--darker); border-color: var(--approved-txt); }
+.filter-btn.f-needs.active    { background: var(--needs-txt);    color: var(--darker); border-color: var(--needs-txt); }
+.filter-btn.f-rejected.active { background: var(--rejected-txt); color: var(--darker); border-color: var(--rejected-txt); }
+.filter-btn.f-pending.active  { border-color: var(--pending-bd); color: var(--pending-txt); background: var(--pending-bg); }
+.filter-right { margin-left: auto; display: flex; gap: 8px; }
+.export-btn { font-family: 'Montserrat',sans-serif; font-size: 16px; font-weight: 600; letter-spacing: .35em; text-transform: uppercase; padding: 7px 16px; border: 1px solid var(--gold); background: transparent; color: var(--gold); cursor: pointer; transition: all .18s; white-space: nowrap; }
+.export-btn:hover { background: var(--gold); color: var(--darker); }
+
+/* Section labels */
+.section-label { background: var(--darker); padding: 10px 48px; border-bottom: 1px solid var(--border2); display: flex; align-items: center; gap: 16px; }
+.section-label span { font-size: 16px; font-weight: 600; letter-spacing: .5em; color: var(--gold); text-transform: uppercase; white-space: nowrap; }
+.section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+/* Post rows */
+.post-row { display: flex; align-items: center; padding: 0 48px; min-height: 68px; border-bottom: 1px solid var(--border2); background: var(--dark); transition: background .15s; gap: 0; text-decoration: none; color: inherit; border-left: 2px solid transparent; }
+.post-row:hover { background: #201F23; }
+.post-row[data-status="approved"] { border-left-color: var(--approved-bd); }
+.post-row[data-status="needs"]    { border-left-color: var(--needs-bd); }
+.post-row[data-status="rejected"] { border-left-color: var(--rejected-bd); }
+.post-row.hidden { display: none; }
+
+.col-num { width: 52px; flex-shrink: 0; }
+.col-num .n { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 300; color: var(--dim); line-height: 1; display: block; }
+.col-num .of25 { font-size: 16px; font-weight: 400; letter-spacing: .1em; color: var(--dim); display: block; margin-top: 1px; }
+
+.col-date { width: 140px; flex-shrink: 0; padding-right: 16px; }
+.col-date .weekday { font-size: 16px; font-weight: 500; letter-spacing: .4em; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: 3px; }
+.col-date .date { font-size: 16px; font-weight: 300; color: var(--text2); display: block; letter-spacing: .01em; }
+
+.col-title { flex: 1; min-width: 0; padding-right: 20px; }
+.col-title .title { font-size: 16px; font-weight: 400; color: var(--text); line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; margin-bottom: 3px; transition: color .15s; }
+.post-row:hover .col-title .title { color: var(--gold); }
+.col-title .cat { font-size: 16px; font-weight: 500; letter-spacing: .4em; color: var(--dim); text-transform: uppercase; display: block; }
+
+.col-status { width: 120px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.dash-comment { font-size: 16px; cursor: help; }
+.col-arrow { width: 20px; flex-shrink: 0; text-align: right; font-size: 16px; color: var(--dim); margin-left: 10px; transition: color .15s, transform .15s; }
+.post-row:hover .col-arrow { color: var(--gold); transform: translateX(3px); }
+
+/* Footer */
+.portal-footer { background: var(--dark); padding: 40px 48px 60px; border-top: 1px solid var(--border); }
+.portal-footer h3 { font-size: 16px; font-weight: 600; letter-spacing: .5em; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; }
+.footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.footer-block h4 { font-size: 16px; font-weight: 600; letter-spacing: .45em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border2); }
+.footer-block p { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.85; }
+
+@media (max-width: 760px) {
+  .hero { padding: 32px 18px 28px; }
+  .hero-title { font-size: 30px; }
+  .filters { padding: 12px 14px; }
+  .section-label { padding: 10px 14px; }
+  .post-row { padding: 0 14px; min-height: 58px; }
+  .col-date { width: 0; overflow: hidden; padding: 0; }
+  .col-status { width: 90px; }
+  .col-num .of25 { display: none; }
+  .portal-footer { padding: 28px 18px 60px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-monogram">MDM</div>
+    <span class="nav-title">Blog Review</span>
+  </a>
+  <div class="nav-right">
+    <span class="live-dot" id="live-indicator">Connecting…</span>
+    <div class="nav-progress">
+      <span class="nav-pill approved" id="pill-approved">0 Approved</span>
+      <span class="nav-pill needs"    id="pill-needs">0 Changes</span>
+      <span class="nav-pill rejected" id="pill-rejected">0 Rejected</span>
+    </div>
+  </div>
+</nav>
+
+<!-- SETUP BANNER — hidden once configured -->
+<div class="setup-banner" id="setup-banner" style="display:none;">
+  <span class="setup-icon">⚙</span>
+  <span class="setup-text"><strong>Live sync not yet configured.</strong> Open <code>app.js</code> and paste your Firebase + EmailJS credentials. See <code>SETUP-INSTRUCTIONS.txt</code> for the 5-minute setup guide. Currently running in local-only mode.</span>
+  <a href="SETUP-INSTRUCTIONS.txt" class="setup-link">View Setup Guide</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">MDM Design Studio · 2026 Content Review</span>
+    <h1 class="hero-title">Blog <em>Publishing</em><br>Schedule</h1>
+    <span class="hero-sub">25 Posts · March – November 2026 · Tuesdays & Thursdays · 9:00 AM CT</span>
+
+    <div class="gold-rule" style="margin-bottom:28px;"></div>
+
+    <div class="stats-row">
+      <div class="stat-block s-total">   <span class="stat-n">25</span><span class="stat-l">Total</span></div>
+      <div class="stat-block s-approved"><span class="stat-n" id="count-approved">0</span><span class="stat-l">Approved</span></div>
+      <div class="stat-block s-needs">   <span class="stat-n" id="count-needs">0</span><span class="stat-l">Changes</span></div>
+      <div class="stat-block s-rejected"><span class="stat-n" id="count-rejected">0</span><span class="stat-l">Rejected</span></div>
+      <div class="stat-block s-pending"> <span class="stat-n" id="count-pending">25</span><span class="stat-l">Pending</span></div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span>Review Progress</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active"      onclick="filterPosts('all',this)">All 25</button>
+  <button class="filter-btn f-approved"  onclick="filterPosts('approved',this)">Approved</button>
+  <button class="filter-btn f-needs"     onclick="filterPosts('needs',this)">Changes</button>
+  <button class="filter-btn f-rejected"  onclick="filterPosts('rejected',this)">Rejected</button>
+  <button class="filter-btn f-pending"   onclick="filterPosts('pending',this)">Pending</button>
+  <div class="filter-right">
+    <button class="export-btn" onclick="exportSummary()">Export Summary</button>
+  </div>
+</div>
+
+<!-- POST LIST -->
+<div id="post-list">
+
+  <div class="section-label"><span>March – April · Hook &amp; Educate</span></div>
+  <a class="post-row" id="row-1"  href="posts/post-01.html" data-status="pending"><div class="col-num"><span class="n">01</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">March 3</span></div><div class="col-title"><span class="title">From Sketch to Sawdust</span><span class="cat">Process</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-2"  href="posts/post-02.html" data-status="pending"><div class="col-num"><span class="n">02</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">March 12</span></div><div class="col-title"><span class="title">Why the First Measurement Matters Most</span><span class="cat">Process</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-3"  href="posts/post-03.html" data-status="pending"><div class="col-num"><span class="n">03</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">March 24</span></div><div class="col-title"><span class="title">10 Questions to Ask Before Hiring a Custom Furniture Maker</span><span class="cat">Consumer Guide</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-4"  href="posts/post-04.html" data-status="pending"><div class="col-num"><span class="n">04</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">April 2</span></div><div class="col-title"><span class="title">Custom vs. Semi-Custom vs. Off-the-Shelf</span><span class="cat">Consumer Guide</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-5"  href="posts/post-05.html" data-status="pending"><div class="col-num"><span class="n">05</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">April 14</span></div><div class="col-title"><span class="title">What Your Lead Time Actually Means</span><span class="cat">Consumer Guide</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-6"  href="posts/post-06.html" data-status="pending"><div class="col-num"><span class="n">06</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">April 28</span></div><div class="col-title"><span class="title">How to Prepare for Your First Consultation</span><span class="cat">Consumer Guide</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+
+  <div class="section-label"><span>May · Trust Building</span></div>
+  <a class="post-row" id="row-7"  href="posts/post-07.html" data-status="pending"><div class="col-num"><span class="n">07</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">May 7</span></div><div class="col-title"><span class="title">The Real Cost of Custom Furniture</span><span class="cat">Consumer Guide</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-8"  href="posts/post-08.html" data-status="pending"><div class="col-num"><span class="n">08</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">May 19</span></div><div class="col-title"><span class="title">Our Most Common Client Regrets</span><span class="cat">Trust Building</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-9"  href="posts/post-09.html" data-status="pending"><div class="col-num"><span class="n">09</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">May 28</span></div><div class="col-title"><span class="title">When a Project Goes Sideways</span><span class="cat">Trust Building</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+
+  <div class="section-label"><span>May – June · Design Strategy</span></div>
+  <a class="post-row" id="row-10" href="posts/post-10.html" data-status="pending"><div class="col-num"><span class="n">10</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">June 9</span></div><div class="col-title"><span class="title">The Case for Restraint</span><span class="cat">Design Strategy</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-11" href="posts/post-11.html" data-status="pending"><div class="col-num"><span class="n">11</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">June 18</span></div><div class="col-title"><span class="title">Built-Ins vs. Freestanding</span><span class="cat">Design Strategy</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-12" href="posts/post-12.html" data-status="pending"><div class="col-num"><span class="n">12</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">June 30</span></div><div class="col-title"><span class="title">Small Space, Big Impact</span><span class="cat">Design Strategy</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+
+  <div class="section-label"><span>June – July · Craft Education</span></div>
+  <a class="post-row" id="row-13" href="posts/post-13.html" data-status="pending"><div class="col-num"><span class="n">13</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">July 9</span></div><div class="col-title"><span class="title">Mixing Wood Tones Without Making It a Mistake</span><span class="cat">Craft Education</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-14" href="posts/post-14.html" data-status="pending"><div class="col-num"><span class="n">14</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">July 23</span></div><div class="col-title"><span class="title">Designing for the Long Game</span><span class="cat">Craft Education</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-15" href="posts/post-15.html" data-status="pending"><div class="col-num"><span class="n">15</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">Aug 4</span></div><div class="col-title"><span class="title">Joinery 101</span><span class="cat">Craft Education</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-16" href="posts/post-16.html" data-status="pending"><div class="col-num"><span class="n">16</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">Aug 13</span></div><div class="col-title"><span class="title">The Finish Line</span><span class="cat">Craft Education</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-17" href="posts/post-17.html" data-status="pending"><div class="col-num"><span class="n">17</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">Aug 25</span></div><div class="col-title"><span class="title">Hardware Deep Dive</span><span class="cat">Craft Education</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+
+  <div class="section-label"><span>August – September · Care &amp; Gift Season</span></div>
+  <a class="post-row" id="row-18" href="posts/post-18.html" data-status="pending"><div class="col-num"><span class="n">18</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">Sept 3</span></div><div class="col-title"><span class="title">How to Care for Your Custom Wood Furniture</span><span class="cat">Care Guide</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-19" href="posts/post-19.html" data-status="pending"><div class="col-num"><span class="n">19</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">Sept 15</span></div><div class="col-title"><span class="title">The Gift of Custom</span><span class="cat">Gift Season</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+
+  <div class="section-label"><span>September · Trade Partners</span></div>
+  <a class="post-row" id="row-20" href="posts/post-20.html" data-status="pending"><div class="col-num"><span class="n">20</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">Sept 24</span></div><div class="col-title"><span class="title">How to Work with MDM as an Interior Designer</span><span class="cat">Trade</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-21" href="posts/post-21.html" data-status="pending"><div class="col-num"><span class="n">21</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">Oct 6</span></div><div class="col-title"><span class="title">What Architects &amp; Builders Should Know About Millwork</span><span class="cat">Trade</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+
+  <div class="section-label"><span>October – November · Thought Leadership</span></div>
+  <a class="post-row" id="row-22" href="posts/post-22.html" data-status="pending"><div class="col-num"><span class="n">22</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">Oct 20</span></div><div class="col-title"><span class="title">What Happens to a Custom Piece When You Move?</span><span class="cat">Thought Leadership</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-23" href="posts/post-23.html" data-status="pending"><div class="col-num"><span class="n">23</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">Oct 29</span></div><div class="col-title"><span class="title">The Environmental Case for Custom</span><span class="cat">Thought Leadership</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-24" href="posts/post-24.html" data-status="pending"><div class="col-num"><span class="n">24</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Tuesday</span><span class="date">Nov 10</span></div><div class="col-title"><span class="title">American-Made Custom Furniture: Why It Matters</span><span class="cat">Thought Leadership</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+  <a class="post-row" id="row-25" href="posts/post-25.html" data-status="pending"><div class="col-num"><span class="n">25</span><span class="of25">of 25</span></div><div class="col-date"><span class="weekday">Thursday</span><span class="date">Nov 19</span></div><div class="col-title"><span class="title">How Social Media Has Changed What Clients Ask For</span><span class="cat">Thought Leadership</span></div><div class="col-status"><span class="dash-comment"></span><span class="dash-status status-badge pending"><span class="badge-text">Pending</span></span></div><div class="col-arrow">›</div></a>
+
+</div>
+
+<!-- FOOTER -->
+<div class="portal-footer">
+  <h3>How to Use This Portal</h3>
+  <div class="footer-grid">
+    <div class="footer-block">
+      <h4>Reading Posts</h4>
+      <p>Tap any row to open the full post. Read on any device — phone, tablet, or desktop. A floating bar at the bottom of every post lets you approve or flag as you go.</p>
+    </div>
+    <div class="footer-block">
+      <h4>Live Sync</h4>
+      <p>Every decision you make syncs instantly to MDM in real time. The green dot in the top-right confirms your connection. No need to export — MDM sees your progress live.</p>
+    </div>
+    <div class="footer-block">
+      <h4>Email Alerts</h4>
+      <p>MDM receives an email at info@thecreatorie.com each time you approve, flag, or reject a post. Your note (if any) is included in the notification.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase + EmailJS SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="app.js"></script>
+<script>
+  const liveEl = document.getElementById('live-indicator');
+
+  window.addEventListener('DOMContentLoaded', () => {
+    // Show setup banner if not configured
+    if (typeof IS_CONFIGURED !== 'undefined' && !IS_CONFIGURED) {
+      document.getElementById('setup-banner').style.display = 'flex';
+      liveEl.textContent = 'Local mode';
+      liveEl.classList.add('offline');
+    }
+
+    // EmailJS init
+    if (typeof emailjs !== 'undefined' && CONFIG.emailjsPublicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+      emailjs.init(CONFIG.emailjsPublicKey);
+    }
+
+    initFirebase();
+
+    // Connection state indicator
+    if (IS_CONFIGURED) {
+      const connRef = firebase.database().ref('.info/connected');
+      connRef.on('value', snap => {
+        if (snap.val() === true) {
+          liveEl.textContent = 'Live';
+          liveEl.className = 'live-dot connected';
+        } else {
+          liveEl.textContent = 'Offline';
+          liveEl.className = 'live-dot offline';
+        }
+      });
+    }
+  });
+
+  window.addEventListener('focus', renderDashboard);
+
+  function filterPosts(status, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.post-row').forEach(row => {
+      if (status === 'all') { row.classList.remove('hidden'); return; }
+      row.classList.toggle('hidden', (row.getAttribute('data-status') || 'pending') !== status);
+    });
+  }
+</script>
+</body>
+</html>
