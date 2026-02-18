@@ -5,13 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Post 02 — MDM Social Review</title>
 <link rel="stylesheet" href="social-style.css">
-<style>
-body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
-</style>
+<style>body { padding-top:92px; padding-bottom:env(safe-area-inset-bottom,120px); }</style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="site-nav">
   <a href="social-index.html" class="nav-brand">
     <div class="nav-monogram">MDM</div>
@@ -28,33 +25,30 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
   </div>
 </nav>
 
-<!-- PORTAL SWITCHER -->
 <div class="portal-switcher">
   <a href="index.html"        class="portal-switch-link">📝 Blog Review</a>
   <a href="social-index.html" class="portal-switch-link active">📲 Social Review</a>
 </div>
 
-<!-- PAGE HEADER -->
 <div class="page-header">
   <div class="phi">
     <div class="post-meta-row">
       <span class="post-num-badge">Post 02 of 2</span>
       <span class="plat-badge-lg">📲 Instagram + Facebook</span>
     </div>
-    <div class="post-date-display" id="date-display">TBD at TBD</div>
-    <div class="post-time-sub">Scheduled</div>
-    <div style="margin-top:14px;">
+    <div class="post-date-display" id="date-display">Friday, March 6, 2026 at 2:00 PM</div>
+    <div class="post-time-sub">Scheduled · Central Time</div>
+    <div style="margin-top:14px;display:flex;align-items:center;gap:14px;">
       <span class="status-badge pending" id="status-badge"><span class="badge-text">Pending Review</span></span>
-      <span class="live-sync-badge" style="margin-left:14px;">Live Sync</span>
+      <span class="live-sync-badge">Live Sync Active</span>
     </div>
   </div>
 </div>
 <div class="gold-rule"></div>
 
-<!-- SPLIT: PHONE PREVIEW + EDIT PANEL -->
 <div class="split-layout">
 
-  <!-- LEFT: PHONE -->
+  <!-- PHONE PREVIEW -->
   <div class="preview-col">
     <p class="preview-label">Live Preview</p>
     <div class="phone-frame">
@@ -69,9 +63,8 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
             </div>
             <div class="ig-dot">···</div>
           </div>
-          <!-- Media: shows actual photo -->
           <div class="ig-media" id="preview-media">
-            <img src="post-02-photo.jpg" alt="Round pedestal dining table in a lakefront setting with scenic water views." style="width:100%;height:100%;object-fit:cover;">
+            <img src="post-02-photo.jpg" alt="Round pedestal dining table in a lakefront setting with scenic water views." style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
           <div class="ig-actions">
             <span class="ig-action-icon">♡</span>
@@ -84,8 +77,8 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
           </div>
           <div class="ig-location" id="preview-location"></div>
           <div class="ig-hashtags" id="preview-hashtags">#MDMDesignStudio #OutdoorTable #RoundTable #LakehouseStyle #PedestalTable #OutdoorLiving #PatioFurniture #LakesideLiving #CustomOutdoor #AlFresco</div>
-          <div class="ig-tags"     id="preview-tags"><span class="ig-tag">@mdmdesignstudio</span></div>
-          <div class="ig-timestamp">TBD · TBD</div>
+          <div class="ig-tags"     id="preview-tags"></div>
+          <div class="ig-timestamp">March 6, 2026 · 2:00 PM</div>
           <div class="plat-tabs">
             <div class="ptab active">Instagram</div>
             <div class="ptab active">Facebook</div>
@@ -93,28 +86,26 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
         </div>
       </div>
     </div>
-    <p style="font-size:11px;color:var(--dim);margin-top:10px;font-style:italic;">Preview updates as you type ↓</p>
+    <p style="font-size:11px;color:var(--dim);margin-top:10px;font-style:italic;">Preview updates live as you edit →</p>
   </div>
 
-  <!-- RIGHT: EDIT PANEL -->
+  <!-- EDIT PANEL -->
   <div class="edit-col">
 
-    <!-- Reviewer name (top, always visible) -->
     <div class="field-row" style="margin-bottom:20px;">
       <label class="field-label">Your Name <span style="color:var(--dim);font-weight:300;">(for notes &amp; version history)</span></label>
       <input class="comment-name-input" type="text" id="commenter-name" placeholder="e.g. Sarah, MDM Team…">
     </div>
 
-    <!-- Editor toolbar -->
     <div class="editor-bar">
       <div class="editor-bar-left">
         <span class="editor-label">Post Details</span>
         <span class="editor-mode-badge" id="edit-mode-badge">Read Only</span>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="editor-btn"         id="edit-toggle-btn"  onclick="toggleEditor()">✎ Edit</button>
-        <button class="editor-btn primary"  id="edit-save-btn"   style="display:none;" onclick="saveEdit(2)">↑ Save Version</button>
-        <button class="editor-btn danger"   id="edit-cancel-btn" style="display:none;" onclick="cancelEdit(2)">✕ Cancel</button>
+        <button class="editor-btn"        id="edit-toggle-btn"  onclick="toggleEditor()">✎ Edit</button>
+        <button class="editor-btn primary" id="edit-save-btn"   style="display:none;" onclick="saveEdit(2)">↑ Save Version</button>
+        <button class="editor-btn danger"  id="edit-cancel-btn" style="display:none;" onclick="cancelEdit(2)">✕ Cancel</button>
       </div>
     </div>
 
@@ -137,15 +128,14 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
              ondrop="handleMediaDrop(event,'media-slot-1')">
           <div class="drop-icon">📎</div>
           <div class="drop-label">Drop new photo or video</div>
-          <div class="drop-hint">JPG, PNG, MP4 · replaces current image in preview</div>
+          <div class="drop-hint">JPG, PNG, MP4 · updates preview instantly</div>
           <input type="file" accept="image/*,video/*" onchange="handleMediaDrop(event,'media-slot-1')" disabled>
         </div>
       </div>
       <div class="field-row">
         <label class="field-label">Alt Text (Accessibility)</label>
         <textarea class="social-field" id="field-altText" disabled rows="2"
-          oninput="onFieldInput(2)"
-          placeholder="Describe the image for screen readers…">Round pedestal dining table in a lakefront setting with scenic water views.</textarea>
+          oninput="onFieldInput(2)">Round pedestal dining table in a lakefront setting with scenic water views.</textarea>
       </div>
     </div>
 
@@ -155,8 +145,7 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
       <div class="field-row">
         <label class="field-label">Caption</label>
         <textarea class="social-field caption-field" id="field-caption" disabled
-          oninput="onFieldInput(2);updateCharCount(this,'cap-count',2200)"
-          placeholder="Write your caption…">Lake views and good company. 🌊 Our round pedestal table takes lakefront living to new heights—designed to weather the elements while elevating every sunset gathering. Indoor style, outdoor durability.</textarea>
+          oninput="onFieldInput(2);updateCharCount(this,'cap-count',2200)">Lake views and good company. 🌊 Our round pedestal table takes lakefront living to new heights—designed to weather the elements while elevating every sunset gathering. Indoor style, outdoor durability.</textarea>
         <div class="char-count" id="cap-count">200 / 2,200</div>
       </div>
     </div>
@@ -167,22 +156,14 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
       <div class="field-row">
         <label class="field-label">Location Tag</label>
         <input class="social-field" type="text" id="field-location" disabled
-          oninput="onFieldInput(2)" placeholder="e.g. Birmingham, Alabama"
-          value="">
-      </div>
-      <div class="field-row">
-        <label class="field-label">Account Tags <span style="color:var(--dim);font-weight:300;">(comma separated)</span></label>
-        <input class="social-field" type="text" id="field-tags" disabled
-          oninput="onFieldInput(2)" placeholder="@mdmdesignstudio, @thecreatorie"
-          value="@mdmdesignstudio">
+          oninput="onFieldInput(2)" placeholder="e.g. Birmingham, Alabama" value="">
       </div>
       <div class="field-row">
         <label class="field-label">Hashtags</label>
         <textarea class="social-field" id="field-hashtags" disabled rows="3"
-          oninput="onFieldInput(2);updateHashCount(this,'hash-count')"
-          placeholder="#CustomFurniture #Woodworking…">#MDMDesignStudio #OutdoorTable #RoundTable #LakehouseStyle #PedestalTable #OutdoorLiving #PatioFurniture #LakesideLiving #CustomOutdoor #AlFresco</textarea>
+          oninput="onFieldInput(2);updateHashCount(this,'hash-count')">#MDMDesignStudio #OutdoorTable #RoundTable #LakehouseStyle #PedestalTable #OutdoorLiving #PatioFurniture #LakesideLiving #CustomOutdoor #AlFresco</textarea>
         <div class="char-count" id="hash-count">10 / 30 tags</div>
-        <p class="field-hint"># added automatically if missing.</p>
+        <p class="field-hint"># is added automatically if missing. No @mentions needed — MDM will tag on post.</p>
       </div>
     </div>
 
@@ -193,26 +174,25 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
         <div class="field-row">
           <label class="field-label">Date</label>
           <input class="social-field" type="text" id="field-postDate" disabled
-            oninput="onFieldInput(2);syncDateDisplay()"
-            placeholder="e.g. March 2, 2026" value="TBD">
+            oninput="onFieldInput(2);syncDateDisplay()" value="March 6, 2026">
         </div>
         <div class="field-row">
           <label class="field-label">Time (CT)</label>
           <input class="social-field" type="time" id="field-postTime" disabled
-            oninput="onFieldInput(2);syncDateDisplay()" value="09:00">
+            oninput="onFieldInput(2);syncDateDisplay()" value="14:00">
         </div>
       </div>
     </div>
 
-  </div><!-- /edit-col -->
-</div><!-- /split-layout -->
+  </div>
+</div>
 
 <!-- DISCUSSION -->
 <div class="discussion-outer">
   <div class="discussion-header">
     <div>
       <div class="discussion-title">Discussion</div>
-      <div style="font-size:12px;color:var(--muted);font-weight:300;margin-top:3px;">Notes visible to everyone · sync live</div>
+      <div style="font-size:12px;color:var(--muted);font-weight:300;margin-top:3px;">Notes visible to everyone · synced live via Firebase</div>
     </div>
     <span class="live-dot connected" id="disc-live">Live</span>
   </div>
@@ -274,7 +254,6 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
   </div>
 </div>
 
-<!-- Firebase + scripts -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -283,40 +262,38 @@ body { padding-top: 92px; padding-bottom: env(safe-area-inset-bottom, 120px); }
 <script>
 const POST_ID = 2;
 
-// Keep both name inputs in sync
-['commenter-name','comment-name-sync'].forEach(id => {
-  document.getElementById(id)?.addEventListener('input', function() {
-    ['commenter-name','comment-name-sync'].forEach(other => {
-      if (other !== id) { const el = document.getElementById(other); if(el) el.value = this.value; }
+// Keep name inputs in sync
+['commenter-name','comment-name-sync'].forEach(srcId => {
+  document.getElementById(srcId)?.addEventListener('input', function() {
+    ['commenter-name','comment-name-sync'].forEach(destId => {
+      if (destId !== srcId) { const el = document.getElementById(destId); if (el) el.value = this.value; }
     });
   });
 });
 
-// submitComment wrapper that reads from either name input
 function submitCommentLocal(postId) {
-  const name = (document.getElementById('commenter-name')?.value || '').trim();
-  const syncEl = document.getElementById('comment-name-sync');
-  if (syncEl && name) syncEl.value = name;
+  const name = document.getElementById('commenter-name')?.value.trim();
+  const sync = document.getElementById('comment-name-sync');
+  if (sync && name) sync.value = name;
   submitComment(postId);
 }
 
-// Char counts
 function updateCharCount(el, id, max) {
   const countEl = document.getElementById(id);
   if (!countEl) return;
   const len = el.value.length;
-  countEl.textContent = len.toLocaleString()+' / '+max.toLocaleString();
-  countEl.className = 'char-count'+(len>max?' over':len>max*.9?' warn':'');
+  countEl.textContent = len.toLocaleString() + ' / ' + max.toLocaleString();
+  countEl.className = 'char-count' + (len > max ? ' over' : len > max * .9 ? ' warn' : '');
 }
+
 function updateHashCount(el, id) {
   const countEl = document.getElementById(id);
   if (!countEl) return;
   const tags = el.value.split(/[\s,]+/).filter(Boolean);
-  countEl.textContent = tags.length+' / 30 tags';
-  countEl.className = 'char-count'+(tags.length>30?' over':tags.length>27?' warn':'');
+  countEl.textContent = tags.length + ' / 30 tags';
+  countEl.className = 'char-count' + (tags.length > 30 ? ' over' : tags.length > 27 ? ' warn' : '');
 }
 
-// Keep date display in header in sync
 function syncDateDisplay() {
   const date = document.getElementById('field-postDate')?.value || '';
   const time = document.getElementById('field-postTime')?.value || '';
@@ -324,13 +301,13 @@ function syncDateDisplay() {
   if (!disp) return;
   let ts = '';
   if (time) {
-    const [h,m] = time.split(':'); const hr=parseInt(h);
-    ts = ' at '+(hr%12||12)+':'+m+(hr>=12?' PM':' AM')+' CT';
+    const [h, m] = time.split(':');
+    const hr = parseInt(h);
+    ts = ' at ' + (hr % 12 || 12) + ':' + m + (hr >= 12 ? ' PM' : ' AM') + ' CT';
   }
-  disp.textContent = (date||'TBD') + ts;
+  disp.textContent = (date || 'TBD') + ts;
 }
 
-// Live connection indicator
 setTimeout(() => {
   if (typeof firebase !== 'undefined' && firebase.apps.length) {
     firebase.database().ref('.info/connected').on('value', snap => {
