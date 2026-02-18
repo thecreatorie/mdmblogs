@@ -234,6 +234,7 @@ async function submitComment(postId) {
   await _pushComment(postId, { author:name, text, status:null, ts:new Date().toISOString() });
   if (textEl) textEl.value = '';
   showToast('comment');
+  await _sendEmail(postId, '💬 New Note', name + ' left a note: "' + text.slice(0,140) + '"');
 }
 
 // ─── LIVE KEYSTROKE SYNC ──────────────────────────────────────────────────────
@@ -413,6 +414,7 @@ async function saveEdit(postId) {
   cancelEdit(postId);
   showToast('saved');
   await _pushComment(postId, { author, text:'✎ Post details edited and saved as new version', status:null, ts:version.ts });
+  await _sendEmail(postId, '✎ Edited', 'Caption/details updated by ' + author + '. Preview: ' + (data.caption||'').slice(0,140));
 }
 
 function _getFields() {
